@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C03E2882959689900E0DB67 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C03E2872959689900E0DB67 /* CoreDataManager.swift */; };
 		3C0AE9E5295D40D800D2D473 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0AE9E4295D40D800D2D473 /* NSMutableAttributedString+Extension.swift */; };
+		3C293FB229A127BC00F65CF1 /* DiaryReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C293FB129A127BC00F65CF1 /* DiaryReport.swift */; };
 		3C3D08882952A60D007DB5E7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D08872952A60D007DB5E7 /* .swiftlint.yml */; };
 		3C59F5EC2950637E0045C66A /* MainDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C59F5EB2950637E0045C66A /* MainDiaryView.swift */; };
 		3C59F5F32950A8AF0045C66A /* Formatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C59F5F22950A8AF0045C66A /* Formatter+Extension.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		3C03E2872959689900E0DB67 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		3C0AE9E4295D40D800D2D473 /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
+		3C293FB129A127BC00F65CF1 /* DiaryReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryReport.swift; sourceTree = "<group>"; };
 		3C3D08872952A60D007DB5E7 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		3C59F5EB2950637E0045C66A /* MainDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDiaryView.swift; sourceTree = "<group>"; };
 		3C59F5F22950A8AF0045C66A /* Formatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extension.swift"; sourceTree = "<group>"; };
@@ -115,6 +117,15 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		3C293FB029A127B100F65CF1 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				3C293FB129A127BC00F65CF1 /* DiaryReport.swift */,
+				F6489C4A2966691A009C552E /* CurrentWeather.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		3C59F5ED295063810045C66A /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				FC9C15FC29640ADF00272838 /* CurrentDiary.swift */,
-				F6489C4A2966691A009C552E /* CurrentWeather.swift */,
 				F63447C529506B8D00A43B7D /* DecoderManager.swift */,
 				3C7F9BAE2963C2A7006CAA4B /* Network */,
 				3C03E2892959731900E0DB67 /* CoreData */,
@@ -200,6 +210,7 @@
 		3CC8D57929A12079002982D3 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				3C293FB029A127B100F65CF1 /* Entity */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -437,6 +448,7 @@
 				F6415B6B2966666800DC81C4 /* DiaryData+CoreDataClass.swift in Sources */,
 				F633D22B295165D10037DD81 /* EditDiaryView.swift in Sources */,
 				3CC8D58429A12136002982D3 /* ListCell.swift in Sources */,
+				3C293FB229A127BC00F65CF1 /* DiaryReport.swift in Sources */,
 				3C7F9BB02963C2D5006CAA4B /* NetworkRequest.swift in Sources */,
 				F6415B6D2966666800DC81C4 /* WeatherData+CoreDataClass.swift in Sources */,
 				3C0AE9E5295D40D800D2D473 /* NSMutableAttributedString+Extension.swift in Sources */,
