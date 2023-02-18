@@ -9,11 +9,9 @@ import Foundation
 import CoreData
 
 final class CoreDataRepository {
-    private let modelName = "DiaryData"
-    
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Diary")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -21,127 +19,98 @@ final class CoreDataRepository {
         })
         return container
     }()
+    
+    private lazy var context = persistentContainer.viewContext
+}
 
-    private func saveContext () {
-        let context = persistentContainer.viewContext
+extension CoreDataRepository {
+    private func convert(from data: DiaryData) -> DiaryReport {
+        let weatherData = CurrentWeather(iconID: data.weather?.iconID, main: data.weather?.main)
+        
+        let diaryReport = DiaryReport(
+            id: data.id ?? UUID(),
+            contentText: data.contentText ?? "",
+            createdAt: data.createdAt ?? Date(),
+            weather: weatherData
+        )
+        
+        return diaryReport
+    }
+    
+    private func saveContext() {
         if context.hasChanges {
             do {
                 try context.save()
             } catch {
-                
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
-    private lazy var context = persistentContainer.viewContext
-    
-    func fetchData() -> Result<[DiaryData], DataError> {
-        var diaryDataList: [DiaryData] = []
-        
-        let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
+}
+
+extension CoreDataRepository {
+    func fetch() -> Result<[DiaryReport], DataError> {
+        let request = DiaryData.fetchRequest()
         
         let dataOrder = NSSortDescriptor(key: "createdAt", ascending: false)
         request.sortDescriptors = [dataOrder]
         
         do {
-            if let dataList = try context.fetch(request) as? [DiaryData] {
-                diaryDataList = dataList
-            }
+            let dataList = try context.fetch(request)
+            return .success(dataList.map(convert(from:)))
         } catch {
             return .failure(.coreDataError)
         }
-        
-        return .success(diaryDataList)
     }
     
-    func saveData(diaryData: CurrentDiary, weatherData: CurrentWeather) throws -> UUID? {
+    func create(data: DiaryReport) throws {
+        let diaryEntity = DiaryData(context: context)
         
-        guard let entity = NSEntityDescription.entity(forEntityName: self.modelName,
-                                                      in: context) else {
-            throw DataError.coreDataError
-        }
-        guard let content = NSManagedObject(entity: entity,
-                                            insertInto: context) as? DiaryData else {
-            throw DataError.coreDataError
-        }
+        diaryEntity.id = data.id
+        diaryEntity.createdAt = data.createdAt
+        diaryEntity.contentText = data.contentText
         
-        content.id = UUID()
-        content.createdAt = diaryData.createdAt
-        content.contentText = diaryData.contentText
+        let weatherEntity = WeatherData(context: context)
+        weatherEntity.iconID = data.weather.main
+        weatherEntity.main = data.weather.main
         
-        let weather = WeatherData(context: context)
-        weather.iconID = weatherData.iconID
-        weather.main = weatherData.main
+        diaryEntity.weather = weatherEntity
         
-        content.weather = weather
-        
-        if context.hasChanges {
-            do {
-                try context.save()
-                return content.id
-            } catch {
-                throw DataError.coreDataError
-            }
-        }
-        
-        return content.id
+        saveContext()
     }
     
-    func updateData(id: UUID, contentText: String) throws {
-        
-        let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
+    func update(id: UUID, contentText: String) throws {
+        let request = DiaryData.fetchRequest()
         request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
         
         do {
-            guard let fetchedDatas = try context.fetch(request) as? [DiaryData] else {
-                throw DataError.coreDataError
-            }
+            let fetchedDatas = try context.fetch(request)
             guard let diaryData = fetchedDatas.first else {
                 throw DataError.coreDataError
             }
-            
             diaryData.setValue(contentText, forKey: "contentText")
-            if context.hasChanges {
-                do {
-                    try context.save()
-                    return
-                } catch {
-                    throw DataError.coreDataError
-                }
-            }
+            
+            saveContext()
         } catch {
             throw DataError.coreDataError
         }
-        return
     }
 
-    func deleteData(id: UUID) throws {
-        
-        let request = NSFetchRequest<NSManagedObject>(entityName: self.modelName)
+    func delete(id: UUID) throws {
+        let request = DiaryData.fetchRequest()
         request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
         
         do {
-            guard let fetchedDatas = try context.fetch(request) as? [DiaryData] else {
-                throw DataError.coreDataError
-            }
+            let fetchedDatas = try context.fetch(request)
             guard let diaryData = fetchedDatas.first else {
                 throw DataError.coreDataError
             }
             
             context.delete(diaryData)
-            
-            if context.hasChanges {
-                do {
-                    try context.save()
-                    return
-                } catch {
-                    throw DataError.coreDataError
-                }
-            }
+            saveContext()
         } catch {
             throw DataError.coreDataError
         }
-        return
     }
 }
