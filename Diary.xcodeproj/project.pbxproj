@@ -15,6 +15,8 @@
 		3C3D08882952A60D007DB5E7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D08872952A60D007DB5E7 /* .swiftlint.yml */; };
 		3C59F5EC2950637E0045C66A /* MainDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C59F5EB2950637E0045C66A /* MainDiaryView.swift */; };
 		3C59F5F32950A8AF0045C66A /* Formatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C59F5F22950A8AF0045C66A /* Formatter+Extension.swift */; };
+		3C66C3C529A2615B00972F5A /* FetchDiaryReportsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C66C3C429A2615B00972F5A /* FetchDiaryReportsUseCase.swift */; };
+		3C66C3C729A2617000972F5A /* DeleteDiaryReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C66C3C629A2617000972F5A /* DeleteDiaryReportUseCase.swift */; };
 		3C7F9BB02963C2D5006CAA4B /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7F9BAF2963C2D5006CAA4B /* NetworkRequest.swift */; };
 		3CC8D58029A120F3002982D3 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC8D57F29A120F3002982D3 /* ListViewController.swift */; };
 		3CC8D58229A12107002982D3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC8D58129A12107002982D3 /* ListViewModel.swift */; };
@@ -53,6 +55,8 @@
 		3C3D08872952A60D007DB5E7 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		3C59F5EB2950637E0045C66A /* MainDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDiaryView.swift; sourceTree = "<group>"; };
 		3C59F5F22950A8AF0045C66A /* Formatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extension.swift"; sourceTree = "<group>"; };
+		3C66C3C429A2615B00972F5A /* FetchDiaryReportsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDiaryReportsUseCase.swift; sourceTree = "<group>"; };
+		3C66C3C629A2617000972F5A /* DeleteDiaryReportUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDiaryReportUseCase.swift; sourceTree = "<group>"; };
 		3C7F9BAF2963C2D5006CAA4B /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		3CC8D57F29A120F3002982D3 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		3CC8D58129A12107002982D3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -157,6 +161,15 @@
 			path = WeatherAPI;
 			sourceTree = "<group>";
 		};
+		3C293FBA29A1322E00F65CF1 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				3C66C3C429A2615B00972F5A /* FetchDiaryReportsUseCase.swift */,
+				3C66C3C629A2617000972F5A /* DeleteDiaryReportUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		3C59F5ED295063810045C66A /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				3C293FB029A127B100F65CF1 /* Entity */,
+				3C293FBA29A1322E00F65CF1 /* UseCase */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -480,9 +494,11 @@
 				F6415B6B2966666800DC81C4 /* DiaryData+CoreDataClass.swift in Sources */,
 				F633D22B295165D10037DD81 /* EditDiaryView.swift in Sources */,
 				3CC8D58429A12136002982D3 /* ListCell.swift in Sources */,
+				3C66C3C529A2615B00972F5A /* FetchDiaryReportsUseCase.swift in Sources */,
 				3C293FB229A127BC00F65CF1 /* DiaryReport.swift in Sources */,
 				3C7F9BB02963C2D5006CAA4B /* NetworkRequest.swift in Sources */,
 				F6415B6D2966666800DC81C4 /* WeatherData+CoreDataClass.swift in Sources */,
+				3C66C3C729A2617000972F5A /* DeleteDiaryReportUseCase.swift in Sources */,
 				3C0AE9E5295D40D800D2D473 /* NSMutableAttributedString+Extension.swift in Sources */,
 				3C59F5EC2950637E0045C66A /* MainDiaryView.swift in Sources */,
 				C739AE2F284DF28600741E8F /* Diary.xcdatamodeld in Sources */,
