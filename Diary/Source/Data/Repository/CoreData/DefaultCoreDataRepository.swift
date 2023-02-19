@@ -1,5 +1,5 @@
 //
-//  CoreDataRepository.swift
+//  DefaultCoreDataRepository.swift
 //  Diary
 //
 //  Created by Kyo on 2023/02/19.
@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final class CoreDataRepository {
+final class DefaultCoreDataRepository {
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Diary")
         container.loadPersistentStores(completionHandler: { (_, error) in
@@ -23,7 +23,7 @@ final class CoreDataRepository {
     private lazy var context = persistentContainer.viewContext
 }
 
-extension CoreDataRepository {
+extension DefaultCoreDataRepository {
     private func convert(from data: DiaryData) -> DiaryReport {
         let weatherData = CurrentWeather(iconID: data.weather?.iconID, main: data.weather?.main)
         
@@ -49,7 +49,8 @@ extension CoreDataRepository {
     }
 }
 
-extension CoreDataRepository {
+// MARK: - CoreDataRepository Protocol
+extension DefaultCoreDataRepository: CoreDataRepository {
     func fetch() -> Result<[DiaryReport], DataError> {
         let request = DiaryData.fetchRequest()
         
