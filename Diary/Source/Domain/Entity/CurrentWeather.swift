@@ -5,7 +5,7 @@
 //  Created by Kyo, Baem on 2023/01/05.
 //
 
-struct CurrentWeather {
+struct CurrentWeather: Hashable {
     var main: String?
     var iconID: String?
     

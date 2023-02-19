@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DiaryReport {
+struct DiaryReport: Hashable {
     var id: UUID
     var contentText: String
     var createdAt: Date
