@@ -37,12 +37,18 @@ final class ListViewController: UIViewController {
 
 // MARK: - DataSource, Snapshot
 extension ListViewController {
-    private func configureDataSource() {
+    private func configureDataSource() -> DataSource {
         let dataSource = DataSource(
             collectionView: collectionView
         ) { collectionView, indexPath, data in
             
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCell.identifiable, for: indexPath) as? ListCell else {
+                let errorCell = UICollectionViewCell()
+                return errorCell
+            }
             
+            //TODO: Cell Configure
+            return cell
         }
         return dataSource
     }
