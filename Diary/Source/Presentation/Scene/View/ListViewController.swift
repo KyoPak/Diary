@@ -22,6 +22,7 @@ final class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
     }
     
     init(viewModel: ListViewModel) {
@@ -32,8 +33,13 @@ final class ListViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func bind() {
+        viewModel.bindData { [weak self] datas in
+            self?.applySnapshot(datas: datas)
+        }
+    }
 }
-
 
 // MARK: - DataSource, Snapshot
 extension ListViewController {
