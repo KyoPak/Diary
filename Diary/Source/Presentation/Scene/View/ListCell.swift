@@ -7,6 +7,14 @@
 
 import UIKit
 
+protocol ViewIdentifiable where Self: UIView { }
+
+extension ViewIdentifiable {
+    static var identifiable: String {
+        return String.init(describing: self)
+    }
+}
+
 final class ListCell: UICollectionViewListCell {
     private let titleLabel = UILabel(textStyle: .title3)
     private let dateLabel = UILabel(textStyle: .body)
@@ -95,3 +103,5 @@ extension ListCell {
         dateLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 }
+
+extension ListCell: ViewIdentifiable { }
