@@ -61,7 +61,7 @@ extension DefaultCoreDataRepository: CoreDataRepository {
             let dataList = try context.fetch(request)
             return .success(dataList.map(convert(from:)))
         } catch {
-            return .failure(.coreDataError)
+            return .failure(.fetchError)
         }
     }
     
@@ -88,13 +88,13 @@ extension DefaultCoreDataRepository: CoreDataRepository {
         do {
             let fetchedDatas = try context.fetch(request)
             guard let diaryData = fetchedDatas.first else {
-                throw DataError.coreDataError
+                throw DataError.fetchError
             }
             diaryData.setValue(contentText, forKey: "contentText")
             
             saveContext()
         } catch {
-            throw DataError.coreDataError
+            throw DataError.updateError
         }
     }
 
@@ -105,13 +105,13 @@ extension DefaultCoreDataRepository: CoreDataRepository {
         do {
             let fetchedDatas = try context.fetch(request)
             guard let diaryData = fetchedDatas.first else {
-                throw DataError.coreDataError
+                throw DataError.fetchError
             }
             
             context.delete(diaryData)
             saveContext()
         } catch {
-            throw DataError.coreDataError
+            throw DataError.deleteError
         }
     }
 }
