@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class WeatherAPIRepository {
+final class DefaultWeatherAPIRepository: WeatherAPIRepository {
     func fetch(url: URL, completion: @escaping (Result<Data, SessionError>) -> Void) {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
