@@ -16,6 +16,8 @@ extension ViewIdentifiable {
 }
 
 final class ListCell: UICollectionViewListCell {
+    private var viewModel: CellViewModel?
+    
     private let titleLabel = UILabel(textStyle: .title3)
     private let dateLabel = UILabel(textStyle: .body)
     private let previewLabel = UILabel(textStyle: .caption1)
@@ -23,7 +25,7 @@ final class ListCell: UICollectionViewListCell {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .black
+        imageView.tintColor = .systemBackground
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -52,26 +54,38 @@ final class ListCell: UICollectionViewListCell {
         distribution: .fillEqually
     )
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        iconImageView.image = nil
-    }
-    
     override init(frame: CGRect) {
-        super.init(frame: frame)
+        super.init(frame: .zero)
         setupUI()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupData() {
-        
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        iconImageView.image = nil
+        [titleLabel, previewLabel, dateLabel].forEach { $0.text = nil }
     }
     
-    func setupImage() {
+    func setupViewModel(_ viewModel: CellViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    func bind() {
+        viewModel?.fetchData { [weak self] diaryReport in
+            var content = diaryReport.contentText.components(separatedBy: "\n")
+            
+            self?.titleLabel.text = content.removeLast()
+            self?.previewLabel.text = content.joined(separator: " ")
+            self?.dateLabel.text = Formatter.changeCustomDate(diaryReport.createdAt)
+        }
         
+        viewModel?.fetchImageData { [weak self] data in
+            self?.iconImageView.image = UIImage(data: data)
+        }
     }
 }
 
