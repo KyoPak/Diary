@@ -18,13 +18,14 @@ final class ListViewController: UIViewController {
     private lazy var dataSource = configureDataSource()
     
     private let viewModel: ListViewModel
-    private lazy var collectionView = UICollectionView()
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
         setupNavigationBar()
         setupUI()
+        registerCell()
         setupConstraint()
     }
     
@@ -51,14 +52,28 @@ extension ListViewController {
             collectionView: collectionView
         ) { collectionView, indexPath, data in
             
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCell.identifiable, for: indexPath) as? ListCell else {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: ListCell.identifiable,
+                for: indexPath
+            ) as? ListCell else {
+                
                 let errorCell = UICollectionViewCell()
                 return errorCell
             }
             
-            //TODO: Cell Configure
+            let cellViewModel = CellViewModel(
+                diary: data,
+                weatherImageUseCase: DefaultLoadWeatherImageUseCase(
+                    weatherAPIRepository: DefaultWeatherAPIRepository()
+                )
+            )
+            
+            cell.setupViewModel(cellViewModel)
+            cell.bind()
+            
             return cell
         }
+        
         return dataSource
     }
     
@@ -116,8 +131,9 @@ extension ListViewController {
     }
     
     private func setupUI() {
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
-        configureCollectionView()
+        view.addSubview(collectionView)
     }
     
     private func configureLayout() -> UICollectionViewLayout {
@@ -129,10 +145,8 @@ extension ListViewController {
         return UICollectionViewCompositionalLayout.list(using: configuration)
     }
     
-    private func configureCollectionView() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(collectionView)
+    private func registerCell() {
+        collectionView.register(ListCell.self, forCellWithReuseIdentifier: ListCell.identifiable)
     }
     
     private func setupConstraint() {
