@@ -19,6 +19,8 @@
 		3C7F9BB02963C2D5006CAA4B /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7F9BAF2963C2D5006CAA4B /* NetworkRequest.swift */; };
 		3C8DF30B29A381A9009F0889 /* loadWeatherImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF30A29A381A9009F0889 /* loadWeatherImageUseCase.swift */; };
 		3C8DF30D29A38237009F0889 /* WeatherAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF30C29A38237009F0889 /* WeatherAPIRepository.swift */; };
+		3C8DF31029A3945D009F0889 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF30F29A3945D009F0889 /* DetailViewModel.swift */; };
+		3C8DF31429A3948B009F0889 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF31329A3948B009F0889 /* DetailViewController.swift */; };
 		3CBA423B29A36E54007D6B7A /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA423A29A36E54007D6B7A /* CellViewModel.swift */; };
 		3CC8D58029A120F3002982D3 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC8D57F29A120F3002982D3 /* ListViewController.swift */; };
 		3CC8D58229A12107002982D3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC8D58129A12107002982D3 /* ListViewModel.swift */; };
@@ -58,6 +60,8 @@
 		3C7F9BAF2963C2D5006CAA4B /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		3C8DF30A29A381A9009F0889 /* loadWeatherImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadWeatherImageUseCase.swift; sourceTree = "<group>"; };
 		3C8DF30C29A38237009F0889 /* WeatherAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIRepository.swift; sourceTree = "<group>"; };
+		3C8DF30F29A3945D009F0889 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		3C8DF31329A3948B009F0889 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		3CBA423A29A36E54007D6B7A /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		3CC8D57F29A120F3002982D3 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		3CC8D58129A12107002982D3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -197,6 +201,31 @@
 			path = RepositoryProtocol;
 			sourceTree = "<group>";
 		};
+		3C8DF30E29A39442009F0889 /* DetailScene */ = {
+			isa = PBXGroup;
+			children = (
+				3C8DF31229A3946F009F0889 /* View */,
+				3C8DF31129A39463009F0889 /* ViewModel */,
+			);
+			path = DetailScene;
+			sourceTree = "<group>";
+		};
+		3C8DF31129A39463009F0889 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3C8DF30F29A3945D009F0889 /* DetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3C8DF31229A3946F009F0889 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3C8DF31329A3948B009F0889 /* DetailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		3CC8D57529A12018002982D3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				3CC8D57C29A120CC002982D3 /* Scene */,
+				3C8DF30E29A39442009F0889 /* DetailScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -464,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C293FB929A1285000F65CF1 /* DefaultWeatherAPIRepository.swift in Sources */,
+				3C8DF31429A3948B009F0889 /* DetailViewController.swift in Sources */,
 				F6ED24002963BDAF00807F78 /* WeatherAPIData.swift in Sources */,
 				3CDDF8E1295996ED00D03BD5 /* UIViewController+Extension.swift in Sources */,
 				3C59F5F32950A8AF0045C66A /* Formatter+Extension.swift in Sources */,
@@ -494,6 +525,7 @@
 				C739AE2F284DF28600741E8F /* Diary.xcdatamodeld in Sources */,
 				FC9C15FD29640ADF00272838 /* CurrentDiary.swift in Sources */,
 				3CC8D58229A12107002982D3 /* ListViewModel.swift in Sources */,
+				3C8DF31029A3945D009F0889 /* DetailViewModel.swift in Sources */,
 				3CC8D58029A120F3002982D3 /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
