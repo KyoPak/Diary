@@ -18,7 +18,7 @@ final class DefaultFetchDiaryReportsUseCase: FetchDiaryReportsUseCase {
         self.coreDataRepository = coreDataRepository
     }
     
-    func fetchData() -> Result<[DiaryReport], DataError>  {
+    func fetchData() -> Result<[DiaryReport], DataError> {
         let result = coreDataRepository.fetch()
         
         switch result {
