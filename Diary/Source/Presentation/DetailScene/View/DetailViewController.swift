@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 final class DetailViewController: UIViewController {
     private enum Placeholder: String {
@@ -25,6 +26,7 @@ final class DetailViewController: UIViewController {
     }()
 
     private var textStackViewBottomConstraints: NSLayoutConstraint?
+    private var locationManager: CLLocationManager?
     
     private lazy var navigationImageView: UIImageView = {
         let imageView = UIImageView()
@@ -116,8 +118,52 @@ extension DetailViewController {
 
 
 // MARK: - CoreLocation
-extension DetailViewController {
-    
+extension DetailViewController: CLLocationManagerDelegate {
+    private func setupCoreLocationManager() {
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        
+        switch locationManager?.authorizationStatus {
+        case .denied:
+            showLocationAlert()
+        case .notDetermined, .restricted:
+            locationManager?.requestWhenInUseAuthorization()
+        case .authorizedAlways, .authorizedWhenInUse:
+            break
+        default:
+            break
+        }
+        
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.startUpdatingLocation()
+        
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let coordinate = locations.last?.coordinate {
+            viewModel.fetchWeatherData(
+                lat: String(coordinate.latitude),
+                long: String(coordinate.longitude)
+            )
+        }
+        locationManager?.stopUpdatingLocation()
+    }
+
+    private func showLocationAlert() {
+        let alert = UIAlertController(
+            title: "위치 권한 요청",
+            message: "위치 권한을 허용 하시겠습니까?",
+            preferredStyle: .alert
+        )
+        let conformAction = UIAlertAction(title: "허용", style: .default) { _ in
+            guard let settingURL = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(settingURL)
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .destructive)
+        [cancelAction, conformAction].forEach(alert.addAction(_:))
+
+        self.present(alert, animated: true)
+    }
 }
 
 // MARK: - Keyboard Event
