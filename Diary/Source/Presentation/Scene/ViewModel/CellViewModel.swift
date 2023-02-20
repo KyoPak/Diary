@@ -16,7 +16,7 @@ final class CellViewModel {
         self.weatherImageUseCase = weatherImageUseCase
     }
     
-    func fetchData(completion: @escaping (DiaryReport) -> Void) {
+    func bindData(completion: @escaping (DiaryReport) -> Void) {
         completion(diary)
     }
     

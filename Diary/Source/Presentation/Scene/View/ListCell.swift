@@ -75,7 +75,7 @@ final class ListCell: UICollectionViewListCell {
     }
     
     func bind() {
-        viewModel?.fetchData { [weak self] diaryReport in
+        viewModel?.bindData { [weak self] diaryReport in
             var content = diaryReport.contentText.components(separatedBy: "\n")
             
             self?.titleLabel.text = content.removeLast()
