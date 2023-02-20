@@ -21,6 +21,8 @@
 		3C8DF30D29A38237009F0889 /* WeatherAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF30C29A38237009F0889 /* WeatherAPIRepository.swift */; };
 		3C8DF31029A3945D009F0889 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF30F29A3945D009F0889 /* DetailViewModel.swift */; };
 		3C8DF31429A3948B009F0889 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF31329A3948B009F0889 /* DetailViewController.swift */; };
+		3C8DF31629A39EF1009F0889 /* FetchWeatherDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF31529A39EF1009F0889 /* FetchWeatherDataUseCase.swift */; };
+		3C8DF31B29A3A0AE009F0889 /* DefaultCoreLocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF31A29A3A0AE009F0889 /* DefaultCoreLocationRepository.swift */; };
 		3CBA423B29A36E54007D6B7A /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA423A29A36E54007D6B7A /* CellViewModel.swift */; };
 		3CC8D58029A120F3002982D3 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC8D57F29A120F3002982D3 /* ListViewController.swift */; };
 		3CC8D58229A12107002982D3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC8D58129A12107002982D3 /* ListViewModel.swift */; };
@@ -62,6 +64,8 @@
 		3C8DF30C29A38237009F0889 /* WeatherAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIRepository.swift; sourceTree = "<group>"; };
 		3C8DF30F29A3945D009F0889 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		3C8DF31329A3948B009F0889 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		3C8DF31529A39EF1009F0889 /* FetchWeatherDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchWeatherDataUseCase.swift; sourceTree = "<group>"; };
+		3C8DF31A29A3A0AE009F0889 /* DefaultCoreLocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCoreLocationRepository.swift; sourceTree = "<group>"; };
 		3CBA423A29A36E54007D6B7A /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		3CC8D57F29A120F3002982D3 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		3CC8D58129A12107002982D3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 		3C293FB329A1280E00F65CF1 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				3C8DF31A29A3A0AE009F0889 /* DefaultCoreLocationRepository.swift */,
 				3C293FB529A1282700F65CF1 /* WeatherAPI */,
 				3C293FB429A1281E00F65CF1 /* CoreData */,
 			);
@@ -160,6 +165,7 @@
 				3C66C3C429A2615B00972F5A /* FetchDiaryReportsUseCase.swift */,
 				3C66C3C629A2617000972F5A /* DeleteDiaryReportUseCase.swift */,
 				3C8DF30A29A381A9009F0889 /* loadWeatherImageUseCase.swift */,
+				3C8DF31529A39EF1009F0889 /* FetchWeatherDataUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -507,6 +513,7 @@
 				3C293FB729A1283D00F65CF1 /* DefaultCoreDataRepository.swift in Sources */,
 				3CBA423B29A36E54007D6B7A /* CellViewModel.swift in Sources */,
 				3C66C3CA29A2634100972F5A /* CoreDataRepository.swift in Sources */,
+				3C8DF31B29A3A0AE009F0889 /* DefaultCoreLocationRepository.swift in Sources */,
 				C739AE27284DF28600741E8F /* SceneDelegate.swift in Sources */,
 				F6489C4B2966691A009C552E /* CurrentWeather.swift in Sources */,
 				F6415B6C2966666800DC81C4 /* DiaryData+CoreDataProperties.swift in Sources */,
@@ -520,6 +527,7 @@
 				3C293FB229A127BC00F65CF1 /* DiaryReport.swift in Sources */,
 				3C7F9BB02963C2D5006CAA4B /* NetworkRequest.swift in Sources */,
 				F6415B6D2966666800DC81C4 /* WeatherData+CoreDataClass.swift in Sources */,
+				3C8DF31629A39EF1009F0889 /* FetchWeatherDataUseCase.swift in Sources */,
 				3C66C3C729A2617000972F5A /* DeleteDiaryReportUseCase.swift in Sources */,
 				3C0AE9E5295D40D800D2D473 /* NSMutableAttributedString+Extension.swift in Sources */,
 				C739AE2F284DF28600741E8F /* Diary.xcdatamodeld in Sources */,
