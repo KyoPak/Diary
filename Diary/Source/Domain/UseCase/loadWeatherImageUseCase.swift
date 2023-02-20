@@ -1,5 +1,5 @@
 //
-//  loadWeatherImageUseCase.swift
+//  LoadWeatherImageUseCase.swift
 //  Diary
 //
 //  Created by Kyo on 2023/02/20.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol loadWeatherImageUseCase {
+protocol LoadWeatherImageUseCase {
     func loadImage(id: String, completion: @escaping (Data) -> Void)
 }
 
-final class DefaultLoadWeatherImageUseCase: loadWeatherImageUseCase {
+final class DefaultLoadWeatherImageUseCase: LoadWeatherImageUseCase {
     private let weatherAPIRepository: WeatherAPIRepository
     
     init(weatherAPIRepository: WeatherAPIRepository) {

@@ -9,9 +9,9 @@ import Foundation
 
 final class CellViewModel {
     private let diary: DiaryReport
-    private let weatherImageUseCase: loadWeatherImageUseCase
+    private let weatherImageUseCase: LoadWeatherImageUseCase
     
-    init(diary: DiaryReport, weatherImageUseCase: loadWeatherImageUseCase) {
+    init(diary: DiaryReport, weatherImageUseCase: LoadWeatherImageUseCase) {
         self.diary = diary
         self.weatherImageUseCase = weatherImageUseCase
     }

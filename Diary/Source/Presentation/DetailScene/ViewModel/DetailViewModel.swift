@@ -9,13 +9,13 @@ import Foundation
 
 final class DetailViewModel {
     private let fetchWeatherDataUseCase: FetchWeatherDataUseCase
-    private let weatherImageUseCase: loadWeatherImageUseCase
+    private let weatherImageUseCase: LoadWeatherImageUseCase
     private var diary: DiaryReport
     
     init(
         data: DiaryReport?,
         fetchWeatherDataUseCase: FetchWeatherDataUseCase,
-        weatherImageUseCase: loadWeatherImageUseCase
+        weatherImageUseCase: LoadWeatherImageUseCase
     ) {
         self.fetchWeatherDataUseCase = fetchWeatherDataUseCase
         self.weatherImageUseCase = weatherImageUseCase
