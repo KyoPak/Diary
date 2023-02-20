@@ -10,15 +10,20 @@ import Foundation
 final class DetailViewModel {
     private let fetchWeatherDataUseCase: FetchWeatherDataUseCase
     private let weatherImageUseCase: LoadWeatherImageUseCase
+    private let createDiaryDataUseCase: CreateDiaryReportUseCase
+    
     private var diary: DiaryReport
     
     init(
         data: DiaryReport?,
         fetchWeatherDataUseCase: FetchWeatherDataUseCase,
-        weatherImageUseCase: LoadWeatherImageUseCase
+        weatherImageUseCase: LoadWeatherImageUseCase,
+        createDiaryUseCase: CreateDiaryReportUseCase
     ) {
         self.fetchWeatherDataUseCase = fetchWeatherDataUseCase
         self.weatherImageUseCase = weatherImageUseCase
+        self.createDiaryDataUseCase = createDiaryUseCase
+        
         guard let data = data else {
             diary = DiaryReport(
                 id: UUID(),
