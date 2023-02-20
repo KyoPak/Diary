@@ -9,7 +9,7 @@ import Foundation
 
 protocol CoreDataRepository {
     func fetch() -> Result<[DiaryReport], DataError>
-    func create(data: DiaryReport) throws
+    func create(data: DiaryReport)
     func update(id: UUID, contentText: String) throws
     func delete(id: UUID) throws
 }

@@ -65,7 +65,7 @@ extension DefaultCoreDataRepository: CoreDataRepository {
         }
     }
     
-    func create(data: DiaryReport) throws {
+    func create(data: DiaryReport) {
         let diaryEntity = DiaryData(context: context)
         
         diaryEntity.id = data.id
