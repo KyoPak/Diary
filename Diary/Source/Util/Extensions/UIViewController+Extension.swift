@@ -8,13 +8,17 @@
 import UIKit
 
 extension UIViewController {
-    func showCustomAlert(alertText: String,
-                         alertMessage: String,
-                         useAction: Bool = false,
-                         completion: (() -> Void)?) {
-        let alert = UIAlertController(title: alertText,
-                                      message: alertMessage,
-                                      preferredStyle: .alert)
+    func showCustomAlert(
+        alertText: String,
+        alertMessage: String,
+        useAction: Bool = false,
+        completion: (() -> Void)?
+    ) {
+        let alert = UIAlertController(
+            title: alertText,
+            message: alertMessage,
+            preferredStyle: .alert
+        )
         
         if useAction {
             let confirm = UIAlertAction(title: "취소", style: .destructive) {  _ in
@@ -32,15 +36,20 @@ extension UIViewController {
 }
 
 extension UIViewController {
-    func moveToActivityView(data: CurrentDiary?) {
+    func moveToActivityView(data: DiaryReport?) {
         guard let sendingText = data?.contentText else { return }
         
-        let activiyController = UIActivityViewController(activityItems: [sendingText],
-                                                         applicationActivities: nil)
-        activiyController.excludedActivityTypes = [.addToReadingList,
-                                                   .assignToContact,
-                                                   .openInIBooks,
-                                                   .saveToCameraRoll]
+        let activiyController = UIActivityViewController(
+            activityItems: [sendingText],
+            applicationActivities: nil
+        )
+        
+        activiyController.excludedActivityTypes = [
+            .addToReadingList,
+            .assignToContact,
+            .openInIBooks,
+            .saveToCameraRoll
+        ]
         
         self.present(activiyController, animated: true, completion: nil)
     }

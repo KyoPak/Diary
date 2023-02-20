@@ -18,11 +18,14 @@ final class ListViewController: UIViewController {
     private lazy var dataSource = configureDataSource()
     
     private let viewModel: ListViewModel
-    private let collectionView = UICollectionView()
+    private lazy var collectionView = UICollectionView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        setupNavigationBar()
+        setupUI()
+        setupConstraint()
     }
     
     init(viewModel: ListViewModel) {
@@ -72,6 +75,25 @@ extension ListViewController {
     @objc private func addButtonTapped() {
         
     }
+    
+    private func swipe(for indexPath: IndexPath?) -> UISwipeActionsConfiguration? {
+        let deleteActionTitle = NSLocalizedString("Delete", comment: "Delete action title")
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title: deleteActionTitle) { [weak self] _, _, _ in
+            self?.viewModel.deleteData(index: indexPath?.item)
+            
+        }
+        
+        let shareActionTitle = NSLocalizedString("Share", comment: "Share action title")
+        let shareAction = UIContextualAction(style: .normal,
+                                             title: shareActionTitle) { [weak self] _, _, _ in
+            
+            self?.moveToActivityView(data: self?.viewModel.fetchSelectData(index: indexPath?.item))
+        }
+        deleteAction.backgroundColor = .systemPink
+        shareAction.backgroundColor = .systemBlue
+        return UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
+    }
 }
 
 // MARK: - UI Configure
@@ -95,6 +117,21 @@ extension ListViewController {
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
+        configureCollectionView()
+    }
+    
+    private func configureLayout() -> UICollectionViewLayout {
+        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        configuration.trailingSwipeActionsConfigurationProvider = .some({ indexPath in
+            self.swipe(for: indexPath)
+        })
+        
+        return UICollectionViewCompositionalLayout.list(using: configuration)
+    }
+    
+    private func configureCollectionView() {
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
     }
     
