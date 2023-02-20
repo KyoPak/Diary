@@ -8,6 +8,14 @@
 import UIKit
 
 final class DetailViewController: UIViewController {
+    private enum Placeholder: String {
+        case textViewPlaceHolder = "Content"
+        
+        var sentence: String {
+            return self.rawValue
+        }
+    }
+    
     private let viewModel: DetailViewModel
     
     private let navigationLabel: UILabel = {
@@ -16,6 +24,8 @@ final class DetailViewController: UIViewController {
         return label
     }()
 
+    private var textStackViewBottomConstraints: NSLayoutConstraint?
+    
     private lazy var navigationImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage()
@@ -29,14 +39,28 @@ final class DetailViewController: UIViewController {
         alignment: .center,
         distribution: .fill
     )
+    
+    private lazy var contentsTextView: UITextView = {
+        let textView = UITextView()
+        textView.textColor = .label
+        textView.font = .preferredFont(forTextStyle: .body)
+        textView.layer.borderColor = UIColor.systemGray5.cgColor
+        textView.text = Placeholder.textViewPlaceHolder.sentence
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentsTextView.delegate = self
         setupNavigationBar()
+        setupUI()
+        setupConstraints()
     }
     
     init(viewModel: DetailViewModel) {
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -44,9 +68,43 @@ final class DetailViewController: UIViewController {
     }
 }
 
-
-extension DetailViewController {
+// MARK: - UITextView Delegate
+extension DetailViewController: UITextViewDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        contentsTextView.resignFirstResponder()
+    }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == Placeholder.textViewPlaceHolder.sentence {
+            textView.text = nil
+            textView.textColor = .label
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = Placeholder.textViewPlaceHolder.sentence
+            textView.textColor = .systemGray
+        }
+        // Save
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        guard let range = textView.selectedTextRange else { return }
+        guard let position = textView.position(from: range.start, offset: 0) else { return }
+        
+        let seperateText = contentsTextView.text.components(separatedBy: "\n")
+        guard let titleText = seperateText.first else { return }
+        let ranges = (titleText as NSString).range(of: titleText)
+        
+        contentsTextView.attributedText = NSMutableAttributedString.customAttributeTitle(
+            text: contentsTextView.text,
+            range: ranges
+        )
+        
+        textView.textColor = .label
+        textView.selectedTextRange = textView.textRange(from: position, to: position)
+    }
 }
 
 // MARK: - Action
@@ -61,6 +119,40 @@ extension DetailViewController {
 extension DetailViewController {
     
 }
+
+// MARK: - Keyboard Event
+extension DetailViewController {
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(showKeyboard),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(hideKeyboard),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    @objc private func showKeyboard(_ notification: NSNotification) {
+        if let keyboardFrame: NSValue = notification
+            .userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            setupConstraintForKeyboard(constant: -(keyboardHeight + 10))
+        }
+    }
+    
+    @objc private func hideKeyboard() {
+        setupConstraintForKeyboard(constant: -10)
+    }
+}
+
 
 // MARK: - UI Configure
 extension DetailViewController {
@@ -81,5 +173,35 @@ extension DetailViewController {
         navigationItem.rightBarButtonItem = rightBarButtonItem
         navigationItem.titleView = navigationStackView
     }
+    
+    private func setupUI() {
+        view.backgroundColor = .systemBackground
+        contentsTextView.layer.borderWidth = 1
+        contentsTextView.layer.cornerRadius = 10
+        contentsTextView.layer.borderColor = UIColor.systemGray4.cgColor
+        view.addSubview(contentsTextView)
+    }
+    
+    private func setupConstraints() {
+        let safeArea = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            contentsTextView.topAnchor.constraint(
+                equalTo: safeArea.topAnchor, constant: 10),
+            contentsTextView.leadingAnchor.constraint(
+                equalTo: safeArea.leadingAnchor, constant: 10),
+            contentsTextView.trailingAnchor.constraint(
+                equalTo: safeArea.trailingAnchor, constant: -10)
+        ])
+        
+        textStackViewBottomConstraints = contentsTextView.bottomAnchor.constraint(
+            equalTo: safeArea.bottomAnchor, constant: -10)
+        textStackViewBottomConstraints?.isActive = true
+    }
+    
+    private func setupConstraintForKeyboard(constant: CGFloat) {
+        textStackViewBottomConstraints?.isActive = false
+        textStackViewBottomConstraints = contentsTextView.bottomAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: constant)
+        textStackViewBottomConstraints?.isActive = true
+    }
 }
-
