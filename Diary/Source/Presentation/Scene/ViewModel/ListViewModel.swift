@@ -48,7 +48,9 @@ extension ListViewModel {
         dataHandler = completion
     }
     
-    func deleteData(index: Int) {
+    func deleteData(index: Int?) {
+        guard let index = index else { return }
+        
         let deleteData = diaryReports.remove(at: index)
         
         do {
@@ -56,5 +58,11 @@ extension ListViewModel {
         } catch {
             sendError(error: error)
         }
+    }
+    
+    func fetchSelectData(index: Int?) -> DiaryReport? {
+        guard let index = index else { return nil }
+        
+        return diaryReports[index]
     }
 }
