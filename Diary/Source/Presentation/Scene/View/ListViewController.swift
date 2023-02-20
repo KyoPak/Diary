@@ -18,7 +18,10 @@ final class ListViewController: UIViewController {
     private lazy var dataSource = configureDataSource()
     
     private let viewModel: ListViewModel
-    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureLayout())
+    private lazy var collectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: configureLayout()
+    )
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,11 @@ final class ListViewController: UIViewController {
         setupUI()
         registerCell()
         setupConstraint()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.setup()
     }
     
     init(viewModel: ListViewModel) {

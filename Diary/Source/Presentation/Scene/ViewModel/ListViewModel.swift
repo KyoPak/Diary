@@ -22,7 +22,6 @@ final class ListViewModel {
     init(fetchUseCase: FetchDiaryReportsUseCase, deleteUseCase: DeleteDiaryReportUseCase) {
         self.fetchUseCase = fetchUseCase
         self.deleteUseCase = deleteUseCase
-        fetchData()
     }
     
     private func fetchData() {
@@ -44,6 +43,10 @@ final class ListViewModel {
 }
 
 extension ListViewModel {
+    func setup() {
+        fetchData()
+    }
+    
     func bindData(completion: @escaping ([DiaryReport]) -> Void) {
         dataHandler = completion
     }
