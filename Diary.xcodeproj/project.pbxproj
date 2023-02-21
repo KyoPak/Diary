@@ -36,8 +36,6 @@
 		C739AE31284DF28600741E8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C739AE30284DF28600741E8F /* Assets.xcassets */; };
 		C739AE34284DF28600741E8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C739AE32284DF28600741E8F /* LaunchScreen.storyboard */; };
 		F62C55D629597B0D00BFD226 /* Pods_Diary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4221CF187888BE8480EE92C5 /* Pods_Diary.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		F633D22B295165D10037DD81 /* EditDiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F633D22A295165D10037DD81 /* EditDiaryView.swift */; };
-		F633D22D295169EE0037DD81 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F633D22C295169EE0037DD81 /* EditViewController.swift */; };
 		F63447C629506B8D00A43B7D /* DecoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63447C529506B8D00A43B7D /* DecoderManager.swift */; };
 		F63447CA29506D2E00A43B7D /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63447C929506D2E00A43B7D /* Error.swift */; };
 		F6415B662966664E00DC81C4 /* MappingModelV2ToV3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F6415B652966664E00DC81C4 /* MappingModelV2ToV3.xcmappingmodel */; };
@@ -84,8 +82,6 @@
 		C739AE30284DF28600741E8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C739AE33284DF28600741E8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C739AE35284DF28600741E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F633D22A295165D10037DD81 /* EditDiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDiaryView.swift; sourceTree = "<group>"; };
-		F633D22C295169EE0037DD81 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		F63447C529506B8D00A43B7D /* DecoderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderManager.swift; sourceTree = "<group>"; };
 		F63447C929506D2E00A43B7D /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		F6415B642966655C00DC81C4 /* Diary_v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Diary_v3.xcdatamodel; sourceTree = "<group>"; };
@@ -112,14 +108,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3C0AE9E3295D2D7700D2D473 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				F633D22C295169EE0037DD81 /* EditViewController.swift */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
 		3C293FB029A127B100F65CF1 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,14 +160,6 @@
 				3C8DF31529A39EF1009F0889 /* FetchWeatherDataUseCase.swift */,
 			);
 			path = UseCase;
-			sourceTree = "<group>";
-		};
-		3C59F5ED295063810045C66A /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				F633D22A295165D10037DD81 /* EditDiaryView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		3C59F5F12950A89A0045C66A /* Extensions */ = {
@@ -371,8 +351,6 @@
 				3C3D08872952A60D007DB5E7 /* .swiftlint.yml */,
 				3CC8D57529A12018002982D3 /* Resource */,
 				3CC8D57629A12056002982D3 /* Source */,
-				3C59F5ED295063810045C66A /* Views */,
-				3C0AE9E3295D2D7700D2D473 /* Controllers */,
 				C739AE2D284DF28600741E8F /* Diary.xcdatamodeld */,
 				F6415B652966664E00DC81C4 /* MappingModelV2ToV3.xcmappingmodel */,
 			);
@@ -501,7 +479,6 @@
 				3C59F5F32950A8AF0045C66A /* Formatter+Extension.swift in Sources */,
 				F6415B662966664E00DC81C4 /* MappingModelV2ToV3.xcmappingmodel in Sources */,
 				F63447CA29506D2E00A43B7D /* Error.swift in Sources */,
-				F633D22D295169EE0037DD81 /* EditViewController.swift in Sources */,
 				3C8DF30D29A38237009F0889 /* WeatherAPIRepository.swift in Sources */,
 				FCEA9EC929545A4200ACA37D /* UIComponent+Extension.swift in Sources */,
 				3C8DF32229A4D21B009F0889 /* NavigationView.swift in Sources */,
@@ -516,7 +493,6 @@
 				F6415B6E2966666800DC81C4 /* WeatherData+CoreDataProperties.swift in Sources */,
 				F63447C629506B8D00A43B7D /* DecoderManager.swift in Sources */,
 				F6415B6B2966666800DC81C4 /* DiaryData+CoreDataClass.swift in Sources */,
-				F633D22B295165D10037DD81 /* EditDiaryView.swift in Sources */,
 				3C8DF30B29A381A9009F0889 /* LoadWeatherImageUseCase.swift in Sources */,
 				3CC8D58429A12136002982D3 /* ListCell.swift in Sources */,
 				3C66C3C529A2615B00972F5A /* FetchDiaryReportsUseCase.swift in Sources */,
