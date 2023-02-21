@@ -73,7 +73,7 @@ extension DefaultCoreDataRepository: CoreDataRepository {
         diaryEntity.contentText = data.contentText
         
         let weatherEntity = WeatherData(context: context)
-        weatherEntity.iconID = data.weather.main
+        weatherEntity.iconID = data.weather.iconID
         weatherEntity.main = data.weather.main
         
         diaryEntity.weather = weatherEntity
