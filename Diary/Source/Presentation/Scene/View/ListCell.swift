@@ -78,7 +78,7 @@ final class ListCell: UICollectionViewListCell {
         viewModel?.bindData { [weak self] diaryReport in
             var content = diaryReport.contentText.components(separatedBy: "\n")
             
-            self?.titleLabel.text = content.removeLast()
+            self?.titleLabel.text = content.removeFirst()
             self?.previewLabel.text = content.joined(separator: " ")
             self?.dateLabel.text = Formatter.changeCustomDate(diaryReport.createdAt)
         }
