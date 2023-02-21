@@ -125,10 +125,41 @@ extension DetailViewController: UITextViewDelegate {
     }
 }
 
-// MARK: - Action
+// MARK: - Action, Present
 extension DetailViewController {
     @objc private func optionButtonTapped() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
+        let shareAction = UIAlertAction(title: "Share", style: .default) { _ in
+            self.viewModel.saveData(contents: self.contentsTextView.text)
+            self.presentActivityView(data: self.viewModel.fetchDiaryReport())
+        }
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            self.viewModel.deleteData()
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        [shareAction, deleteAction, cancelAction].forEach(alert.addAction(_:))
+        present(alert, animated: true)
+    }
+    
+    private func presentLocationAlert() {
+        let alert = UIAlertController(
+            title: "위치 권한 요청",
+            message: "위치 권한을 허용 하시겠습니까?",
+            preferredStyle: .alert
+        )
+        let conformAction = UIAlertAction(title: "허용", style: .default) { _ in
+            guard let settingURL = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(settingURL)
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .destructive)
+        [cancelAction, conformAction].forEach(alert.addAction(_:))
+
+        self.present(alert, animated: true)
     }
 }
 
@@ -140,7 +171,7 @@ extension DetailViewController: CLLocationManagerDelegate {
         
         switch locationManager?.authorizationStatus {
         case .denied:
-            showLocationAlert()
+            presentLocationAlert()
         case .notDetermined, .restricted:
             locationManager?.requestWhenInUseAuthorization()
         case .authorizedAlways, .authorizedWhenInUse:
@@ -165,22 +196,6 @@ extension DetailViewController: CLLocationManagerDelegate {
                 }
         }
         locationManager?.stopUpdatingLocation()
-    }
-    
-    private func showLocationAlert() {
-        let alert = UIAlertController(
-            title: "위치 권한 요청",
-            message: "위치 권한을 허용 하시겠습니까?",
-            preferredStyle: .alert
-        )
-        let conformAction = UIAlertAction(title: "허용", style: .default) { _ in
-            guard let settingURL = URL(string: UIApplication.openSettingsURLString) else { return }
-            UIApplication.shared.open(settingURL)
-        }
-        let cancelAction = UIAlertAction(title: "취소", style: .destructive)
-        [cancelAction, conformAction].forEach(alert.addAction(_:))
-
-        self.present(alert, animated: true)
     }
 }
 

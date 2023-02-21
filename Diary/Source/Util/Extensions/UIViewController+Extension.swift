@@ -36,7 +36,7 @@ extension UIViewController {
 }
 
 extension UIViewController {
-    func moveToActivityView(data: DiaryReport?) {
+    func presentActivityView(data: DiaryReport?) {
         guard let sendingText = data?.contentText else { return }
         
         let activiyController = UIActivityViewController(
@@ -51,6 +51,7 @@ extension UIViewController {
             .saveToCameraRoll
         ]
         
-        self.present(activiyController, animated: true, completion: nil)
+        present(activiyController, animated: true, completion: nil)
     }
 }
+

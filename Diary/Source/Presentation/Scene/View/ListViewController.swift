@@ -125,7 +125,6 @@ extension ListViewController: UICollectionViewDelegate {
     }
 }
 
-
 // MARK: - UIAction
 extension ListViewController {
     @objc private func addButtonTapped() {
@@ -144,7 +143,7 @@ extension ListViewController {
         let shareAction = UIContextualAction(style: .normal,
                                              title: shareActionTitle) { [weak self] _, _, _ in
             
-            self?.moveToActivityView(data: self?.viewModel.fetchSelectData(index: indexPath?.item))
+            self?.presentActivityView(data: self?.viewModel.fetchSelectData(index: indexPath?.item))
         }
         deleteAction.backgroundColor = .systemPink
         shareAction.backgroundColor = .systemBlue
