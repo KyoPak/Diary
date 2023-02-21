@@ -17,7 +17,7 @@ final class DetailViewModel {
     
     private let fetchWeatherDataUseCase: FetchWeatherDataUseCase
     private let weatherImageUseCase: LoadWeatherImageUseCase
-    private let createDiaryDataUseCase: CreateDiaryReportUseCase
+    private let createDiaryDataUseCase: SaveDiaryReportUseCase
     
     private var diary: DiaryReport
     
@@ -25,7 +25,7 @@ final class DetailViewModel {
         data: DiaryReport?,
         fetchWeatherDataUseCase: FetchWeatherDataUseCase,
         weatherImageUseCase: LoadWeatherImageUseCase,
-        createDiaryUseCase: CreateDiaryReportUseCase
+        createDiaryUseCase: SaveDiaryReportUseCase
     ) {
         self.fetchWeatherDataUseCase = fetchWeatherDataUseCase
         self.weatherImageUseCase = weatherImageUseCase
@@ -50,9 +50,20 @@ extension DetailViewModel {
     func bindData(completion: @escaping (DiaryReport) -> Void) {
         completion(diary)
     }
-    
-    func convertDateText() -> String {
-        return Formatter.changeCustomDate(diary.createdAt)
+
+    func saveData(contents: String) {
+        diary.contentText = contents
+        
+        if mode == .new {
+            createDiaryDataUseCase.createData(data: diary)
+            mode = .edit
+            return
+        }
+        do {
+            try createDiaryDataUseCase.updateData(data: diary)
+        } catch {
+            print(error)
+        }
     }
     
     func fetchWeatherData(

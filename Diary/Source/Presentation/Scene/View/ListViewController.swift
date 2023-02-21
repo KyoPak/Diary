@@ -64,7 +64,7 @@ extension ListViewController {
             weatherImageUseCase: DefaultLoadWeatherImageUseCase(
                 weatherAPIRepository: DefaultWeatherAPIRepository()
             ),
-            createDiaryUseCase: DefaultCreateDiaryReportUseCase(
+            createDiaryUseCase: DefaultSaveDiaryReportUseCase(
                 coreDataRepository: DefaultCoreDataRepository()
             )
         )

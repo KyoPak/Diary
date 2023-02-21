@@ -52,6 +52,11 @@ final class DetailViewController: UIViewController {
         return textView
     }()
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.saveData(contents: contentsTextView.text)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         contentsTextView.delegate = self
@@ -209,6 +214,7 @@ extension DetailViewController {
     
     @objc private func hideKeyboard() {
         setupConstraintForKeyboard(constant: -10)
+        viewModel.saveData(contents: contentsTextView.text)
     }
 }
 
