@@ -1,5 +1,5 @@
 # Diary ReadME
-- Kyo와 Baem가 만든 Diary App입니다.
+- MVC를 기반으로 팀원과 만든 Diary앱을 개인적으로 MVVM-C로 Refactoring하였습니다.
 - 텍스트 기능을 구현 할 때, 아이폰 `메모` 앱의 텍스트 입력 로직을 참고하였습니다.
 
 ## 목차
@@ -232,6 +232,11 @@
 - 서버에서 받아온 weather 데이터를 디코딩하기 위한 Type입니다.
     
 </details>
+
+### 👟 Refactoring MVVM-C : 2023/02/19 ~ 
+
+- ✅ MVVM-C
+- ✅ SearchBar 구현 
 
 ## 기술적 도전
 
