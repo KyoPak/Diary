@@ -16,8 +16,9 @@ final class DetailViewModel {
     private(set) var mode: Mode = .edit
     
     private let fetchWeatherDataUseCase: FetchWeatherDataUseCase
-    private let weatherImageUseCase: LoadWeatherImageUseCase
     private let createDiaryDataUseCase: SaveDiaryReportUseCase
+    private let deleteUseCase: DeleteDiaryReportUseCase
+    private let weatherImageUseCase: LoadWeatherImageUseCase
     
     private var diary: DiaryReport
     
@@ -25,11 +26,13 @@ final class DetailViewModel {
         data: DiaryReport?,
         fetchWeatherDataUseCase: FetchWeatherDataUseCase,
         weatherImageUseCase: LoadWeatherImageUseCase,
-        createDiaryUseCase: SaveDiaryReportUseCase
+        createDiaryUseCase: SaveDiaryReportUseCase,
+        delteUseCase: DeleteDiaryReportUseCase
     ) {
         self.fetchWeatherDataUseCase = fetchWeatherDataUseCase
         self.weatherImageUseCase = weatherImageUseCase
         self.createDiaryDataUseCase = createDiaryUseCase
+        self.deleteUseCase = delteUseCase
         
         guard let data = data else {
             mode = .new
@@ -66,6 +69,27 @@ extension DetailViewModel {
         }
     }
     
+    func deleteData() {
+        do {
+            try deleteUseCase.deleteData(id: diary.id)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func deleteDataAfterCheck() {
+        guard diary.contentText == "" || diary.contentText ==  checkTextViewPlaceHolder()
+        else {
+            return
+        }
+        
+        do {
+            try deleteUseCase.deleteData(id: diary.id)
+        } catch {
+            print(error)
+        }
+    }
+    
     func fetchWeatherData(
         lat: String,
         long: String,
@@ -85,5 +109,9 @@ extension DetailViewModel {
                 completion(data)
             }
         }
+    }
+    
+    func checkTextViewPlaceHolder() -> String {
+        return "오늘의 일기를 입력해주세요."
     }
 }

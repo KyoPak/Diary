@@ -66,6 +66,9 @@ extension ListViewController {
             ),
             createDiaryUseCase: DefaultSaveDiaryReportUseCase(
                 coreDataRepository: DefaultCoreDataRepository()
+            ),
+            delteUseCase: DefaultDeleteDiaryReportUseCase(
+                coreDataRepository: DefaultCoreDataRepository()
             )
         )
         
