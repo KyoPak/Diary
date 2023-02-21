@@ -8,6 +8,13 @@
 import Foundation
 
 final class DetailViewModel {
+    enum Mode {
+        case new
+        case edit
+    }
+    
+    private(set) var mode: Mode = .edit
+    
     private let fetchWeatherDataUseCase: FetchWeatherDataUseCase
     private let weatherImageUseCase: LoadWeatherImageUseCase
     private let createDiaryDataUseCase: CreateDiaryReportUseCase
@@ -25,6 +32,7 @@ final class DetailViewModel {
         self.createDiaryDataUseCase = createDiaryUseCase
         
         guard let data = data else {
+            mode = .new
             diary = DiaryReport(
                 id: UUID(),
                 contentText: "",
@@ -47,9 +55,14 @@ extension DetailViewModel {
         return Formatter.changeCustomDate(diary.createdAt)
     }
     
-    func fetchWeatherData(lat: String, long: String) {
+    func fetchWeatherData(
+        lat: String,
+        long: String,
+        completion: @escaping () -> Void
+    ) {
         fetchWeatherDataUseCase.fetchWeatherData(lat: lat, lon: long) { data in
             self.diary.weather = data
+            completion()
         }
     }
     

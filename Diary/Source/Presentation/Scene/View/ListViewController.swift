@@ -170,6 +170,7 @@ extension ListViewController {
     
     private func setupUI() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.delegate = self
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
     }
