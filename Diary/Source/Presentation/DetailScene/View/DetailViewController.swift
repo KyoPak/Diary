@@ -54,10 +54,21 @@ final class DetailViewController: UIViewController {
     private func bind() {
         viewModel.bindData { [weak self] data in
             self?.contentsTextView.text = data.contentText
+            self?.textConfigure(text: data.contentText)
             self?.navigationView.setuplabel(text: Formatter.changeCustomDate(data.createdAt))
         }
         
         setupWeatherImage()
+    }
+    
+    private func textConfigure(text: String) {
+        var seperateText = text.components(separatedBy: "\n")
+        let range = (seperateText.first! as NSString).range(of: seperateText.removeFirst())
+        contentsTextView.attributedText = NSMutableAttributedString.customAttributeTitle(
+            text: contentsTextView.text,
+            range: range
+        )
+        contentsTextView.textColor = .label
     }
 }
 
@@ -157,7 +168,6 @@ extension DetailViewController: CLLocationManagerDelegate {
         
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.startUpdatingLocation()
-        
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
