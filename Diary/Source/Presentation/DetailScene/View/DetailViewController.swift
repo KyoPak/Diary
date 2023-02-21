@@ -55,7 +55,9 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentsTextView.delegate = self
+        setupCoreLocationAuthority()
         setupNavigationBar()
+        bind()
         setupUI()
         setupConstraints()
     }
@@ -67,6 +69,15 @@ final class DetailViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func bind() {
+        viewModel.bindData { [weak self] data in
+            self?.contentsTextView.text = data.contentText
+            self?.navigationLabel.text = Formatter.changeCustomDate(data.createdAt)
+        }
+        
+        setupWeatherImage()
     }
 }
 
@@ -116,10 +127,9 @@ extension DetailViewController {
     }
 }
 
-
 // MARK: - CoreLocation
 extension DetailViewController: CLLocationManagerDelegate {
-    private func setupCoreLocationManager() {
+    private func setupCoreLocationAuthority() {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         
@@ -140,15 +150,18 @@ extension DetailViewController: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard viewModel.mode == .new else { return }
+        
         if let coordinate = locations.last?.coordinate {
             viewModel.fetchWeatherData(
                 lat: String(coordinate.latitude),
-                long: String(coordinate.longitude)
-            )
+                long: String(coordinate.longitude)) { [weak self] in
+                    self?.setupWeatherImage()
+                }
         }
         locationManager?.stopUpdatingLocation()
     }
-
+    
     private func showLocationAlert() {
         let alert = UIAlertController(
             title: "위치 권한 요청",
@@ -199,16 +212,9 @@ extension DetailViewController {
     }
 }
 
-
 // MARK: - UI Configure
 extension DetailViewController {
     private func setupNavigationBar() {
-        navigationLabel.text = viewModel.convertDateText()
-        
-        viewModel.fetchImageData { [weak self] data in
-            self?.navigationImageView.image = UIImage(data: data)
-        }
-        
         let rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "square.and.arrow.up"),
             style: .plain,
@@ -218,6 +224,12 @@ extension DetailViewController {
 
         navigationItem.rightBarButtonItem = rightBarButtonItem
         navigationItem.titleView = navigationStackView
+    }
+    
+    private func setupWeatherImage() {
+        viewModel.fetchImageData { [weak self] data in
+            self?.navigationImageView.image = UIImage(data: data)
+        }
     }
     
     private func setupUI() {
