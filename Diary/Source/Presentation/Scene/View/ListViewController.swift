@@ -18,6 +18,14 @@ final class ListViewController: UIViewController {
     private lazy var dataSource = configureDataSource()
     
     private let viewModel: ListViewModel
+    
+    private var isFiltering: Bool {
+        let searchController = navigationItem.searchController
+        let isActive = searchController?.isActive ?? false
+        let isSearchBarHasText = searchController?.searchBar.text?.isEmpty == false
+        return isActive && isSearchBarHasText
+    }
+    
     private lazy var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: configureLayout()
@@ -27,6 +35,7 @@ final class ListViewController: UIViewController {
         super.viewDidLoad()
         bind()
         setupNavigationBar()
+        setupSearchBar()
         setupUI()
         registerCell()
         setupConstraint()
@@ -151,10 +160,23 @@ extension ListViewController {
     }
 }
 
+extension ListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text?.lowercased() else { return }
+        viewModel.setupFilterText(text)
+    }
+}
+
+extension ListViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.clearFilterData()
+    }
+}
+
 // MARK: - UI Configure
 extension ListViewController {
     private func setupNavigationBar() {
-        title = "일기장"
+        title = "Diary"
         let appearence = UINavigationBarAppearance()
         appearence.backgroundColor = .systemGray5
         navigationController?.navigationBar.standardAppearance = appearence
@@ -168,6 +190,19 @@ extension ListViewController {
         
         navigationItem.rightBarButtonItem = addBarButton
         navigationController?.navigationBar.tintColor = .label
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    private func setupSearchBar() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search Content"
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     private func setupUI() {

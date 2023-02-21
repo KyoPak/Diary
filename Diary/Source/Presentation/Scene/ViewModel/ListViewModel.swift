@@ -17,7 +17,18 @@ final class ListViewModel {
         }
     }
     
+    private var filterDiaryReports: [DiaryReport] = [] {
+        didSet {
+            if filterDiaryReports.isEmpty {
+                dataHandler?(diaryReports)
+            } else {
+                dataHandler?(filterDiaryReports)
+            }
+        }
+    }
+    
     private var dataHandler: (([DiaryReport]) -> Void)?
+    private var filterDataHandler: (([DiaryReport]) -> Void)?
     
     init(fetchUseCase: FetchDiaryReportsUseCase, deleteUseCase: DeleteDiaryReportUseCase) {
         self.fetchUseCase = fetchUseCase
@@ -51,6 +62,14 @@ extension ListViewModel {
         dataHandler = completion
     }
     
+    func setupFilterText(_ text: String) {
+        print(text)
+        filterDiaryReports = diaryReports.filter({ diaryReport in
+            diaryReport.contentText.lowercased().contains(text)
+        })
+        print(filterDiaryReports)
+    }
+    
     func deleteData(index: Int?) {
         guard let index = index else { return }
         
@@ -63,9 +82,13 @@ extension ListViewModel {
         }
     }
     
+    func clearFilterData() {
+        filterDiaryReports.removeAll()
+    }
+    
     func fetchSelectData(index: Int?) -> DiaryReport? {
         guard let index = index else { return nil }
         
-        return diaryReports[index]
+        return filterDiaryReports.isEmpty ? diaryReports[index] : filterDiaryReports[index]
     }
 }
