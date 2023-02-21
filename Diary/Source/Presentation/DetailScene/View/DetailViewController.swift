@@ -9,45 +9,18 @@ import UIKit
 import CoreLocation
 
 final class DetailViewController: UIViewController {
-    private enum Placeholder: String {
-        case textViewPlaceHolder = "Content"
-        
-        var sentence: String {
-            return self.rawValue
-        }
-    }
-    
     private let viewModel: DetailViewModel
+    private let navigationView = NavigationView()
     
-    private let navigationLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
-        return label
-    }()
-
     private var textStackViewBottomConstraints: NSLayoutConstraint?
     private var locationManager: CLLocationManager?
-    
-    private lazy var navigationImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage()
-        return imageView
-    }()
-
-    private lazy var navigationStackView = UIStackView(
-        subview: [navigationImageView, navigationLabel],
-        spacing: 5,
-        axis: .horizontal,
-        alignment: .center,
-        distribution: .fill
-    )
     
     private lazy var contentsTextView: UITextView = {
         let textView = UITextView()
         textView.textColor = .label
         textView.font = .preferredFont(forTextStyle: .body)
         textView.layer.borderColor = UIColor.systemGray5.cgColor
-        textView.text = Placeholder.textViewPlaceHolder.sentence
+        textView.text = viewModel.checkTextViewPlaceHolder()
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
@@ -55,12 +28,14 @@ final class DetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.saveData(contents: contentsTextView.text)
+        viewModel.deleteDataAfterCheck()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         contentsTextView.delegate = self
         setupCoreLocationAuthority()
+        setupNotification()
         setupNavigationBar()
         bind()
         setupUI()
@@ -79,7 +54,7 @@ final class DetailViewController: UIViewController {
     private func bind() {
         viewModel.bindData { [weak self] data in
             self?.contentsTextView.text = data.contentText
-            self?.navigationLabel.text = Formatter.changeCustomDate(data.createdAt)
+            self?.navigationView.setuplabel(text: Formatter.changeCustomDate(data.createdAt))
         }
         
         setupWeatherImage()
@@ -93,7 +68,7 @@ extension DetailViewController: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == Placeholder.textViewPlaceHolder.sentence {
+        if textView.text == viewModel.checkTextViewPlaceHolder() {
             textView.text = nil
             textView.textColor = .label
         }
@@ -101,10 +76,10 @@ extension DetailViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = Placeholder.textViewPlaceHolder.sentence
+            textView.text = viewModel.checkTextViewPlaceHolder()
             textView.textColor = .systemGray
         }
-        // Save
+        viewModel.saveData(contents: textView.text)
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -244,12 +219,12 @@ extension DetailViewController {
         )
 
         navigationItem.rightBarButtonItem = rightBarButtonItem
-        navigationItem.titleView = navigationStackView
+        navigationItem.titleView = navigationView
     }
     
     private func setupWeatherImage() {
         viewModel.fetchImageData { [weak self] data in
-            self?.navigationImageView.image = UIImage(data: data)
+            self?.navigationView.setupImage(image: UIImage(data: data))
         }
     }
     

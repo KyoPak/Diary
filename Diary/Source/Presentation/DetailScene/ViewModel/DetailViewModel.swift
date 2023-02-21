@@ -111,6 +111,10 @@ extension DetailViewModel {
         }
     }
     
+    func fetchDiaryReport() -> DiaryReport {
+        return diary
+    }
+    
     func checkTextViewPlaceHolder() -> String {
         return "오늘의 일기를 입력해주세요."
     }
