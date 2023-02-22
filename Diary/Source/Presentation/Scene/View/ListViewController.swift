@@ -189,8 +189,11 @@ extension ListViewController {
         )
         
         navigationItem.rightBarButtonItem = addBarButton
-        navigationController?.navigationBar.tintColor = .label
+
+        navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        navigationController?.navigationBar.tintColor = .label
     }
     
     private func setupSearchBar() {

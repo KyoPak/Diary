@@ -221,6 +221,14 @@ extension DetailViewController {
 // MARK: - UI Configure
 extension DetailViewController {
     private func setupNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .systemGray6
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .never
+        
         let rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "square.and.arrow.up"),
             style: .plain,
