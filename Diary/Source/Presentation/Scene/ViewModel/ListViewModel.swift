@@ -67,7 +67,6 @@ extension ListViewModel {
         filterDiaryReports = diaryReports.filter({ diaryReport in
             diaryReport.contentText.lowercased().contains(text)
         })
-        print(filterDiaryReports)
     }
     
     func deleteData(index: Int?) {
