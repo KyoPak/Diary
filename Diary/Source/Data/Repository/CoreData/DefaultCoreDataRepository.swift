@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 final class DefaultCoreDataRepository {
-    private lazy var persistentContainer: NSPersistentContainer = {
+    private let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Diary")
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
@@ -20,7 +20,9 @@ final class DefaultCoreDataRepository {
         return container
     }()
     
-    private lazy var context = persistentContainer.viewContext
+    private var context: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
 }
 
 extension DefaultCoreDataRepository {
