@@ -1,4 +1,5 @@
-# Diary ReadME
+# Diary Refactoring ReadME
+
 - MVC를 기반으로 팀원과 만든 Diary앱을 개인적으로 MVVM-C로 Refactoring하였습니다.
 - 텍스트 기능을 구현 할 때, 아이폰 `메모` 앱의 텍스트 입력 로직을 참고하였습니다.
 
@@ -6,9 +7,9 @@
 1. [팀 소개](#팀-소개)
 2. [GroundRule](#ground-rule)
 3. [Code Convention](#code-convention)
-4. [실행 화면](#실행-화면)
-5. [폴더 구조](#폴더-구조)
-6. [타임라인](#타임라인)
+4. [타임라인](#타임라인)
+5. [실행 화면](#실행-화면)
+6. [폴더 구조](#폴더-구조)
 7. [기술적 도전](#기술적-도전)
 8. [트러블 슈팅 및 고민](#트러블-슈팅-및-고민)
 9. [참고 링크](#참고-링크)
@@ -26,6 +27,121 @@
 ## Code Convention
 
 [Code Convention 바로가기](https://github.com/Dylan-yoon/ios-diary/wiki/Code-Convention)
+
+##  타임라인
+### 👟 Step 1: Team
+
+- ✅ Date Formatter의 지역 및 길이별 표현의 활용
+- ✅ Text View의 활용
+- ✅ Notification을 활용한 키보드 동작에 따른 View 제어
+- ✅ Compositional Layout을 이용한 CollectionView 활용
+- ✅ SwiftLint 적용
+
+<details>
+<summary> 
+펼쳐보기
+</summary>
+    
+1️⃣ MainViewController
+- 앱 동작 시 가장 먼저 보여주는 View에 대한 `Controller`입니다.
+- `MainViewController`에서 CollectionView의 DataSource로는 DiffableDataSource를 사용하였습니다.
+    
+2️⃣ AddViewController
+- Right Navigation Bar Button을 클릭했을 때 보여지는 `AddDiaryView`에 대한 `Controller`입니다.
+- 내부에서 `title`을 설정 언어에 맞는 날짜로 설정하였습니다.
+    
+3️⃣ DecodeManager
+- 임시데이터인 Json 데이터에 대한 `Decoder`와 decode관련 메서드를 정의한 구조체가 정의된 파일입니다.
+    
+4️⃣ Diary
+- 말 그대로 Diary에 대한 데이터이며, `Hashable`을 만족하기 위해 `uuid`를 추가하였습니다.
+
+</details>
+
+### 👟 Step 2: Team
+
+- ✅ 코어데이터 모델 생성
+- ✅ Swipe를 통한 삭제기능 구현
+- ✅ Swipe를 통한 공유기능 구현
+- ✅ ActivityController 구현
+- ✅ NSMutableAttributeString 활용
+- ✅ UICollectionLayoutListConfiguration 활용
+- ✅ Text View Delegate의 활용
+
+<details>
+<summary> 
+펼쳐보기
+</summary>
+    
+1️⃣ CoreDataManager
+- CoreDataManager에서 CRUD를 구현하였습니다.
+    - Create(Save)
+    - Read(Fetch)
+    - Update
+    - Delete   
+- 위 메서드들을 정의하여 CoreDataManager의 싱글톤 객체에서 호출할 수 있도록 구현하였습니다.
+
+2️⃣ AddViewController ➡️ EditViewController
+- Add, Modify하는 기능의 Controller을 하나의 Controller로 통합하였습니다.
+
+    
+3️⃣ EditDiaryView
+- Add, Modify 화면을 하나의 View로 통합하였습니다.
+
+
+</details>
+
+### 👟 Step 3: Team
+
+- ✅ Open API의 활용
+- ✅ Core Location의 활용
+- ✅ 코어데이터 모델 및 DB 마이그레이션
+- ✅ 코어데이터 모델 Relationship 사용
+- ✅ NSMutableAttributeString 사용
+- ✅ selectedTextRange 사용
+- ✅ NSCache 사용
+- ✅ DarkMode 적용
+
+<details>
+<summary> 
+펼쳐보기
+</summary>
+    
+1️⃣ CurrentDiary
+- CoreData의 ManagedObject에 직접 접근하지 않기 위한 Type입니다.
+- 해당 인스턴스를 생성하여 사용자가 입력한 Diary 정보들을 넣고 CoreData 내부에 Save하도록 하였습니다.
+
+2️⃣ CurrentWeather
+
+- CoreData의 ManagedObject에 직접 접근하지 않기 위한 Type입니다.
+- 사용자 Device에 대한 위도 경도를 바탕으로 해당 인스턴스를 생성하여 Open API에서 가져온 날씨에 대한 data와 icon에 대한 data를 넣고 CoreData 내부에 Save하도록 하였습니다.
+    
+3️⃣ NetworkManager
+
+- Server에 데이터를 요청하기 위한 fetchData()가 속해있는 class입니다.
+- 해당 클래스는 여러개 만들 필요가 없다고 생각되어 싱글톤 패턴을 사용하였습니다.
+
+4️⃣ NetworkRequest
+
+- 위도, 경도를 바탕으로 날씨에 대한 data, 날씨 iconID에 대한 data를 받아올 수 있는 URL.
+- 날씨 iconID을 서버에 보내서 해당 ID에 맞는 IconImage를 받아올 수 있는 URL.
+- 위의 2개의 case에 맞는 URL을 얻기 위해 만든 별도의 enum 타입입니다.
+    
+5️⃣ WeatherAPIData  
+
+- 서버에서 받아온 weather 데이터를 디코딩하기 위한 Type입니다.
+    
+</details>
+
+### 👟 Refactoring MVVM-C: Personal
+기간 : 2023/02/19 ~ 2023/02/24
+
+- ✅ MVVM Architecture 사용
+- ✅ Coordinator Pattern  사용
+- ✅ Clean Architecture 사용
+- ✅ SearchBar 구현
+
+
 
 ## 실행 화면
 
@@ -77,168 +193,115 @@
 ## 폴더 구조
 ```
 ├── Diary
-│   ├── AppDelegate.swift
-│   ├── SceneDelegate.swift
-│   ├── Info.plist
-│   ├── Base.lproj
-│   │   └── LaunchScreen.storyboard
-│   ├── Constant
-│   │   └── Error.swift
-│   ├── Extensions
-│   │   ├── Formatter+Extension.swift
-│   │   ├── NSMutableAttributedString+Extension.swift
-│   │   ├── UIComponent+Extension.swift
-│   │   └── UIViewController+Extension.swift
-│   ├── Models
-│   │   ├── CoreData
-│   │   │   └── CoreDataManager.swift
-│   │   ├── CurrentDiary.swift
-│   │   ├── CurrentWeather.swift
-│   │   ├── DecoderManager.swift
-│   │   └── Network
-│   │       ├── NetworkManager.swift
-│   │       ├── NetworkRequest.swift
-│   │       └── WeatherAPIData.swift
-│   ├── Views
-│   |   ├── CustomListCell.swift
-│   |   ├── EditDiaryView.swift
-│   |   └── MainDiaryView.swift
-│   ├── Controllers
-│   │   ├── EditViewController.swift
-│   │   └── MainViewController.swift
-│   ├── MappingModelV2ToV3.xcmappingmodel
-│   │   └── xcmapping.xml
-│   └──Diary.xcdatamodeld
-│       ├── Diary.xcdatamodel
-│       │   └── contents
-│       ├── Diary_v2.xcdatamodel
-│       │   └── contents
-│       ├── Diary_v3.xcdatamodel
-│       │   └── contents
-│       └── MappingModelV2ToV3.xcmappingmodel
-│           └── xcmapping.xml
-├── DiaryData+CoreDataClass.swift
-├── DiaryData+CoreDataProperties.swift
-├── WeatherData+CoreDataClass.swift
-├── WeatherData+CoreDataProperties.swift
-├── MappingModelV2ToV3.xcmappingmodel
-│   └── xcmapping.xml
+│   ├── Resource
+│   └── Source
+│   |   ├── Application
+│   |   │   ├── AppDelegate.swift
+│   |   │   └── SceneDelegate.swift
+│   |   ├── Coordinator
+│   |   │   ├── Coordinator.swift
+│   |   │   ├── DetailCoordinator.swift
+│   |   │   ├── ListCoordinator.swift
+│   |   │   └── MainCoordinator.swift
+│   |   ├── Data
+│   |   │   └── Repository
+│   |   │       ├── CoreData
+│   |   │       │   ├── DefaultCoreDataRepository.swift
+│   |   │       │   ├── DiaryData+CoreDataClass.swift
+│   |   │       │   ├── DiaryData+CoreDataProperties.swift
+│   |   │       │   ├── WeatherData+CoreDataClass.swift
+│   |   │       │   └── WeatherData+CoreDataProperties.swift
+│   |   │       └── WeatherAPI
+│   |   │           ├── DefaultWeatherAPIRepository.swift
+│   |   │           ├── NetworkRequest.swift
+│   |   │           └── WeatherAPIData.swift
+│   |   ├── Domain
+│   |   │   ├── Entity
+│   |   │   │   ├── CurrentWeather.swift
+│   |   │   │   ├── DecoderManager.swift
+│   |   │   │   └── DiaryReport.swift
+│   |   │   ├── RepositoryProtocol
+│   |   │   │   ├── CoreDataRepository.swift
+│   |   │   │   └── WeatherAPIRepository.swift
+│   |   │   └── UseCase
+│   |   │       ├── DeleteDiaryReportUseCase.swift
+│   |   │       ├── FetchDiaryReportsUseCase.swift
+│   |   │       ├── FetchWeatherDataUseCase.swift
+│   |   │       ├── LoadWeatherImageUseCase.swift
+│   |   │       └── SaveDiaryReportUseCase.swift
+│   |   ├── Presentation
+│   |   │   ├── DetailScene
+│   |   │   │   ├── View
+│   |   │   │   │   ├── DetailViewController.swift
+│   |   │   │   │   └── NavigationView.swift
+│   |   │   │   └── ViewModel
+│   |   │   │       └── DetailViewModel.swift
+│   |   │   └── Scene
+│   |   │       ├── View
+│   |   │       │   ├── ListCell.swift
+│   |   │       │   └── ListViewController.swift
+│   |   │       └── ViewModel
+│   |   │           ├── CellViewModel.swift
+│   |   │           └── ListViewModel.swift
+│   |   └── Util
+│   |       ├── Constant
+│   |       │   └── Error.swift
+│   |       └── Extensions
+│   |           ├── Formatter+Extension.swift
+│   |           ├── NSMutableAttributedString+Extension.swift
+│   |           ├── UIComponent+Extension.swift
+│   |           └── UIViewController+Extension.swift
+│   ├── Diary.xcdatamodeld
+│   │   ├── Diary.xcdatamodel
+│   │   │   └── contents
+│   │   ├── Diary_v2.xcdatamodel
+│   │   │   └── contents
+│   │   └── Diary_v3.xcdatamodel
+│   │       └── contents
+│   └── MappingModelV2ToV3.xcmappingmodel
+│       └── xcmapping.xml
 ├── Podfile
 ├── Podfile.lock
-└──README.md
+└── README.md
 ```
 
-##  타임라인
-### 👟 Step 1
-
-- ✅ Date Formatter의 지역 및 길이별 표현의 활용
-- ✅ Text View의 활용
-- ✅ Notification을 활용한 키보드 동작에 따른 View 제어
-- ✅ Compositional Layout을 이용한 CollectionView 활용
-- ✅ SwiftLint 적용
-
-<details>
-<summary> 
-펼쳐보기
-</summary>
-    
-1️⃣ MainViewController
-- 앱 동작 시 가장 먼저 보여주는 View에 대한 `Controller`입니다.
-- `MainViewController`에서 CollectionView의 DataSource로는 DiffableDataSource를 사용하였습니다.
-    
-2️⃣ AddViewController
-- Right Navigation Bar Button을 클릭했을 때 보여지는 `AddDiaryView`에 대한 `Controller`입니다.
-- 내부에서 `title`을 설정 언어에 맞는 날짜로 설정하였습니다.
-    
-3️⃣ DecodeManager
-- 임시데이터인 Json 데이터에 대한 `Decoder`와 decode관련 메서드를 정의한 구조체가 정의된 파일입니다.
-    
-4️⃣ Diary
-- 말 그대로 Diary에 대한 데이터이며, `Hashable`을 만족하기 위해 `uuid`를 추가하였습니다.
-
-</details>
-
-### 👟 Step 2
-
-- ✅ 코어데이터 모델 생성
-- ✅ Swipe를 통한 삭제기능 구현
-- ✅ Swipe를 통한 공유기능 구현
-- ✅ ActivityController 구현
-- ✅ NSMutableAttributeString 활용
-- ✅ UICollectionLayoutListConfiguration 활용
-- ✅ Text View Delegate의 활용
-
-<details>
-<summary> 
-펼쳐보기
-</summary>
-    
-1️⃣ CoreDataManager
-- CoreDataManager에서 CRUD를 구현하였습니다.
-    - Create(Save)
-    - Read(Fetch)
-    - Update
-    - Delete   
-- 위 메서드들을 정의하여 CoreDataManager의 싱글톤 객체에서 호출할 수 있도록 구현하였습니다.
-
-2️⃣ AddViewController ➡️ EditViewController
-- Add, Modify하는 기능의 Controller을 하나의 Controller로 통합하였습니다.
-
-    
-3️⃣ EditDiaryView
-- Add, Modify 화면을 하나의 View로 통합하였습니다.
-
-
-</details>
-
-### 👟 Step 3
-
-- ✅ Open API의 활용
-- ✅ Core Location의 활용
-- ✅ 코어데이터 모델 및 DB 마이그레이션
-- ✅ 코어데이터 모델 Relationship 사용
-- ✅ NSMutableAttributeString 사용
-- ✅ selectedTextRange 사용
-- ✅ NSCache 사용
-- ✅ DarkMode 적용
-
-<details>
-<summary> 
-펼쳐보기
-</summary>
-    
-1️⃣ CurrentDiary
-- CoreData의 ManagedObject에 직접 접근하지 않기 위한 Type입니다.
-- 해당 인스턴스를 생성하여 사용자가 입력한 Diary 정보들을 넣고 CoreData 내부에 Save하도록 하였습니다.
-
-2️⃣ CurrentWeather
-
-- CoreData의 ManagedObject에 직접 접근하지 않기 위한 Type입니다.
-- 사용자 Device에 대한 위도 경도를 바탕으로 해당 인스턴스를 생성하여 Open API에서 가져온 날씨에 대한 data와 icon에 대한 data를 넣고 CoreData 내부에 Save하도록 하였습니다.
-    
-3️⃣ NetworkManager
-
-- Server에 데이터를 요청하기 위한 fetchData()가 속해있는 class입니다.
-- 해당 클래스는 여러개 만들 필요가 없다고 생각되어 싱글톤 패턴을 사용하였습니다.
-
-4️⃣ NetworkRequest
-
-- 위도, 경도를 바탕으로 날씨에 대한 data, 날씨 iconID에 대한 data를 받아올 수 있는 URL.
-- 날씨 iconID을 서버에 보내서 해당 ID에 맞는 IconImage를 받아올 수 있는 URL.
-- 위의 2개의 case에 맞는 URL을 얻기 위해 만든 별도의 enum 타입입니다.
-    
-5️⃣ WeatherAPIData  
-
-- 서버에서 받아온 weather 데이터를 디코딩하기 위한 Type입니다.
-    
-</details>
-
-### 👟 Refactoring MVVM-C : 2023/02/19 ~ 
-
-- ✅ MVVM-C
-- ✅ SearchBar 구현 
-
 ## 기술적 도전
+
+### ⚙️ MVVM
+<details>
+<summary> 
+펼쳐보기
+</summary>
+
+
+</details>
+
+### ⚙️ Clean Architecture
+<details>
+<summary> 
+펼쳐보기
+</summary>
+
+
+</details>
+
+### ⚙️ Coordinator Pattern 
+<details>
+<summary> 
+펼쳐보기
+</summary>
+
+도입 이유
+- `CoreDataRepository`의 객체를 UseCase마다 여러 번 생성하다보니 `persistentContainer`의 중복이 발생하여 정상 동작하지만 warning이 발생하였습니다.
+    하나의 코어데이터 객체를 공유하려다보니 각 UseCase에서 `CoreDataRepository` 객체에 대한 접근제어를 낮추거나 해당 객체를 반환하여 다른 viewModel에 전달해줘야 하는 로직이 필요하였습니다.
+    이런 로직은 매우 부자연스럽다고 생각이 들었고, `Coordinator`를 사용하여 해당되는 `Coordinator`에서 뷰의 이동시에 Repository 객체를 전달하여 viewModel에 주입해주면 좋다는 생각이 들었습니다.<br></br>
+
+느낀 점
+ - `Coordinator`를 사용해보니 뷰의 이동에 대한 로직이 굉장히 깔끔해졌다고 생각이들었습니다. 또한 `ViewController(View)`에서 화면이동 및 다음 화면의 `ViewModel`을 주입해줘야하는 책임이 없어지다보니 코드가 한결 간결해졌습니다.
+    향후 앱의 규모가 커져서 하나의 View에서 이동해야 할 View가 많을 때 보다 효과적이고 좋은 확장성을 가질 수 있을 것이라고 생각이 들었습니다.
+    
+</details>
+
 
 ### ⚙️ ModernCollectionView - CompositionalLayout
 
@@ -545,6 +608,37 @@ func textViewDidChange(_ textView: UITextView) {
     
 </details>
 
+### 🔥 Large Title 잔상 
+
+<details>
+<summary> 
+펼쳐보기
+</summary>
+    
+<img width = 400, src = "https://i.imgur.com/kwcgtJE.png" > 
+
+- 위 사진처럼 전화면의 LargeTitle의 잔상이 다음 View 이동시 보이는 문제가 있었습니다.
+- 실기기 테스트에서도 동일한 문제가 발생하였습니다.<br></br>
+- 이동한 화면에서 LargeTitle을 사용을 희망하지 않아 `prefersLargeTitles`를 `false`했던 것이 문제였습니다.
+- 해당 프로퍼티를 false로 하는 순간 `largeTitleDiaplayMode`는 동작하지 않게 되면서 그 전 화면의 잔상이 남고 false처리가 되는 것으로 보입니다.(확실하지는 않습니다..)
+- 해당 프로퍼티를 true로 한 후, DisplayMode를 never(미사용)으로 변경 후 잔상 이슈를 해결할 수 있었습니다.
+```swift
+navigationController?.navigationBar.prefersLargeTitles = true
+navigationItem.largeTitleDisplayMode = .never
+```
+
+    
+</details>
+
+### 🔥 Search Bar 
+
+<details>
+<summary> 
+펼쳐보기
+</summary>
+ 
+    
+</details>
 
 ## 참고 링크
 
