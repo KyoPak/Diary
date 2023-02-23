@@ -9,6 +9,8 @@ import UIKit
 import CoreLocation
 
 final class DetailViewController: UIViewController {
+    weak var coordinator: DetailCoordinator?
+    
     private let viewModel: DetailViewModel
     private let navigationView = NavigationView()
     
@@ -29,6 +31,11 @@ final class DetailViewController: UIViewController {
         super.viewWillDisappear(animated)
         viewModel.saveData(contents: contentsTextView.text)
         viewModel.deleteDataAfterCheck()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        coordinator?.didFinishLeft()
     }
     
     override func viewDidLoad() {

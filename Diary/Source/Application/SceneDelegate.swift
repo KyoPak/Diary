@@ -17,14 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let viewModel = ListViewModel(
-            fetchUseCase:
-                DefaultFetchDiaryReportsUseCase(coreDataRepository: DefaultCoreDataRepository()),
-            deleteUseCase:
-                DefaultDeleteDiaryReportUseCase(coreDataRepository: DefaultCoreDataRepository()))
         
-        let listViewController = ListViewController(viewModel: viewModel)
-        let navigationController = UINavigationController(rootViewController: listViewController)
+        let navigationController = UINavigationController()
+        let coreDataRepository = DefaultCoreDataRepository()
+
+        let coordinator = MainCoordinator(
+            navigationController: navigationController,
+            coreDataRepository: coreDataRepository
+        )
+        
+        coordinator.start()
         
         window.rootViewController = navigationController
         window.makeKeyAndVisible()

@@ -15,6 +15,8 @@ final class ListViewController: UIViewController {
         case main
     }
     
+    weak var coordinator: ListCoordinator?
+    
     private lazy var dataSource = configureDataSource()
     
     private let viewModel: ListViewModel
@@ -62,31 +64,6 @@ final class ListViewController: UIViewController {
     }
 }
 
-// MARK: - Present DetailView
-extension ListViewController {
-    private func presentDetailView(data: DiaryReport?) {
-        let detailViewModel = DetailViewModel(
-            data: data,
-            fetchWeatherDataUseCase: DefaultFetchWeatherDataUseCase(
-                weatherAPIRepository: DefaultWeatherAPIRepository()
-            ),
-            weatherImageUseCase: DefaultLoadWeatherImageUseCase(
-                weatherAPIRepository: DefaultWeatherAPIRepository()
-            ),
-            createDiaryUseCase: DefaultSaveDiaryReportUseCase(
-                coreDataRepository: DefaultCoreDataRepository()
-            ),
-            delteUseCase: DefaultDeleteDiaryReportUseCase(
-                coreDataRepository: DefaultCoreDataRepository()
-            )
-        )
-        
-        let detailViewController = DetailViewController(viewModel: detailViewModel)
-        
-        navigationController?.pushViewController(detailViewController, animated: true)
-    }
-}
-
 // MARK: - DataSource, Snapshot
 extension ListViewController {
     private func configureDataSource() -> DataSource {
@@ -130,14 +107,14 @@ extension ListViewController {
 // MARK: - CollectionView Delegate
 extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presentDetailView(data: viewModel.fetchSelectData(index: indexPath.item))
+        coordinator?.createDetailCoordinator(data: viewModel.fetchSelectData(index: indexPath.item))
     }
 }
 
 // MARK: - UIAction
 extension ListViewController {
     @objc private func addButtonTapped() {
-        presentDetailView(data: nil)
+        coordinator?.createDetailCoordinator(data: nil)
     }
     
     private func swipe(for indexPath: IndexPath?) -> UISwipeActionsConfiguration? {
