@@ -28,6 +28,7 @@ final class ListCoordinator: Coordinator {
         
         let viewController = ListViewController(viewModel: viewModel)
         viewController.coordinator = self
+        viewModel.errorDelegate = viewController
         
         navigationController.pushViewController(viewController, animated: true)
     }

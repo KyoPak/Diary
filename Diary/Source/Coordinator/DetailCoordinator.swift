@@ -44,8 +44,10 @@ final class DetailCoordinator: Coordinator {
         )
         
         let viewController = DetailViewController(viewModel: viewModel)
-        
         viewController.coordinator = self
+        
+        viewModel.errorDelegate = viewController
+        
         navigationController.pushViewController(viewController, animated: true)
     }
     
