@@ -42,4 +42,8 @@ final class CellViewModel {
             }
         }
     }
+    
+    private func saveCacheData(id: String, data: Data) {
+        cacheUseCase.save(id: id, data: data)
+    }
 }
