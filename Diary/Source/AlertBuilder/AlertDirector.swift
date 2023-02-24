@@ -8,7 +8,12 @@
 import UIKit
 
 final class AlertDirector {
-    private let alert = ConcreteAlertBuilder()
+    private let alert: ConcreteAlertBuilder
+    
+    init(style: UIAlertController.Style) {
+        alert = ConcreteAlertBuilder(style: style)
+    }
+    
     func setupAlert(title: String, message: String) -> UIAlertController {
         return alert
             .setupTitle(title)
@@ -19,7 +24,6 @@ final class AlertDirector {
     
     func setupActionSheet(title: String, message: String) -> UIAlertController {
         return alert
-            .setupStyle(.actionSheet)
             .setupTitle(title)
             .setupMessage(message)
             .setupAction(title: "취소", style: .cancel, handler: nil)

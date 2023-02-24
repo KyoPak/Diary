@@ -120,7 +120,7 @@ extension DetailViewController: UITextViewDelegate {
 // MARK: - Present Error Alert
 extension DetailViewController: ErrorPresentable {
     func presentErrorAlert(title: String, message: String) {
-        let alertDirector = AlertDirector()
+        let alertDirector = AlertDirector(style: .alert)
         present(alertDirector.setupAlert(title: title, message: message), animated: true)
     }
 }
@@ -128,7 +128,7 @@ extension DetailViewController: ErrorPresentable {
 // MARK: - Action, Present
 extension DetailViewController {
     @objc private func optionButtonTapped() {
-        let alertDirector = AlertDirector()
+        let alertDirector = AlertDirector(style: .actionSheet)
         alertDirector.addAction(title: "공유", style: .default) { _ in
             self.viewModel.saveData(contents: self.contentsTextView.text)
             self.presentActivityView(data: self.viewModel.fetchDiaryReport())
@@ -140,10 +140,11 @@ extension DetailViewController {
         }
         
         present(alertDirector.setupActionSheet(title: "", message: "선택하세요"), animated: true)
+        
     }
     
     private func presentLocationAlert() {
-        let alertDirector = AlertDirector()
+        let alertDirector = AlertDirector(style: .alert)
         alertDirector.addAction(title: "허용", style: .default) { _ in
             guard let settingURL = URL(string: UIApplication.openSettingsURLString) else { return }
             UIApplication.shared.open(settingURL)

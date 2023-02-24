@@ -8,7 +8,11 @@
 import UIKit
 
 final class ConcreteAlertBuilder: AlertBuilder {
-    var alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+    var alert: UIAlertController
+    
+    init(style: UIAlertController.Style) {
+        alert = UIAlertController(title: nil, message: nil, preferredStyle: style)
+    }
     
     func setupTitle(_ text: String) -> AlertBuilder {
         alert.title = text
@@ -17,13 +21,6 @@ final class ConcreteAlertBuilder: AlertBuilder {
     
     func setupMessage(_ text: String) -> AlertBuilder {
         alert.message = text
-        return self
-    }
-    
-    func setupStyle(_ style: UIAlertController.Style) -> AlertBuilder {
-        let actions = alert.actions
-        alert = UIAlertController(title: alert.title, message: alert.message, preferredStyle: style)
-        actions.forEach(alert.addAction(_:))
         return self
     }
     

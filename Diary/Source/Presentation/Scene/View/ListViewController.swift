@@ -108,7 +108,7 @@ extension ListViewController: UICollectionViewDelegate {
 // MARK: - Present Error Alert
 extension ListViewController: ErrorPresentable {
     func presentErrorAlert(title: String, message: String) {
-        let alertDirector = AlertDirector()
+        let alertDirector = AlertDirector(style: .alert)
         present(alertDirector.setupAlert(title: title, message: message), animated: true)
     }
 }
