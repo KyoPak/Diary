@@ -33,8 +33,9 @@
 		3CE8A8E329A7923B00ECC30A /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8E229A7923B00ECC30A /* MainCoordinator.swift */; };
 		3CE8A8E529A7925E00ECC30A /* ListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8E429A7925E00ECC30A /* ListCoordinator.swift */; };
 		3CE8A8E729A7928000ECC30A /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8E629A7928000ECC30A /* DetailCoordinator.swift */; };
-		3CE8A8EA29A881B700ECC30A /* AlertBilderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8E929A881B700ECC30A /* AlertBilderable.swift */; };
-		3CE8A8EC29A88AD900ECC30A /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8EB29A88AD900ECC30A /* AlertBuilder.swift */; };
+		3CE8A8EA29A881B700ECC30A /* AlertBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8E929A881B700ECC30A /* AlertBilder.swift */; };
+		3CE8A8EC29A88AD900ECC30A /* ConcreteAlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8EB29A88AD900ECC30A /* ConcreteAlertBuilder.swift */; };
+		3CE8A8EE29A88BCA00ECC30A /* AlertDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8ED29A88BCA00ECC30A /* AlertDirector.swift */; };
 		C739AE25284DF28600741E8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739AE24284DF28600741E8F /* AppDelegate.swift */; };
 		C739AE27284DF28600741E8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739AE26284DF28600741E8F /* SceneDelegate.swift */; };
 		C739AE2F284DF28600741E8F /* Diary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C739AE2D284DF28600741E8F /* Diary.xcdatamodeld */; };
@@ -80,8 +81,9 @@
 		3CE8A8E229A7923B00ECC30A /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		3CE8A8E429A7925E00ECC30A /* ListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoordinator.swift; sourceTree = "<group>"; };
 		3CE8A8E629A7928000ECC30A /* DetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
-		3CE8A8E929A881B700ECC30A /* AlertBilderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBilderable.swift; sourceTree = "<group>"; };
-		3CE8A8EB29A88AD900ECC30A /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
+		3CE8A8E929A881B700ECC30A /* AlertBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBilder.swift; sourceTree = "<group>"; };
+		3CE8A8EB29A88AD900ECC30A /* ConcreteAlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteAlertBuilder.swift; sourceTree = "<group>"; };
+		3CE8A8ED29A88BCA00ECC30A /* AlertDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDirector.swift; sourceTree = "<group>"; };
 		4221CF187888BE8480EE92C5 /* Pods_Diary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Diary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E05864E63AC2CB2749DE4D /* Pods-Diary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Diary.release.xcconfig"; path = "Target Support Files/Pods-Diary/Pods-Diary.release.xcconfig"; sourceTree = "<group>"; };
 		92EED3D4BCDEBCD5005EBC94 /* Pods-Diary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Diary.debug.xcconfig"; path = "Target Support Files/Pods-Diary/Pods-Diary.debug.xcconfig"; sourceTree = "<group>"; };
@@ -335,8 +337,9 @@
 		3CE8A8E829A8813500ECC30A /* AlertBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				3CE8A8E929A881B700ECC30A /* AlertBilderable.swift */,
-				3CE8A8EB29A88AD900ECC30A /* AlertBuilder.swift */,
+				3CE8A8E929A881B700ECC30A /* AlertBilder.swift */,
+				3CE8A8EB29A88AD900ECC30A /* ConcreteAlertBuilder.swift */,
+				3CE8A8ED29A88BCA00ECC30A /* AlertDirector.swift */,
 			);
 			path = AlertBuilder;
 			sourceTree = "<group>";
@@ -507,8 +510,9 @@
 				3C8DF31429A3948B009F0889 /* DetailViewController.swift in Sources */,
 				F6ED24002963BDAF00807F78 /* WeatherAPIData.swift in Sources */,
 				3CE8A8E529A7925E00ECC30A /* ListCoordinator.swift in Sources */,
-				3CE8A8EC29A88AD900ECC30A /* AlertBuilder.swift in Sources */,
-				3CE8A8EA29A881B700ECC30A /* AlertBilderable.swift in Sources */,
+				3CE8A8EE29A88BCA00ECC30A /* AlertDirector.swift in Sources */,
+				3CE8A8EC29A88AD900ECC30A /* ConcreteAlertBuilder.swift in Sources */,
+				3CE8A8EA29A881B700ECC30A /* AlertBilder.swift in Sources */,
 				3CDDF8E1295996ED00D03BD5 /* UIViewController+Extension.swift in Sources */,
 				3C59F5F32950A8AF0045C66A /* Formatter+Extension.swift in Sources */,
 				F6415B662966664E00DC81C4 /* MappingModelV2ToV3.xcmappingmodel in Sources */,

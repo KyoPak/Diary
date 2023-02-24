@@ -25,6 +25,7 @@ final class ConcreteAlertBuilder: AlertBuilder {
         return self
     }
     
+    @discardableResult
     func setupAction(
         title: String,
         style: UIAlertAction.Style,
