@@ -84,7 +84,8 @@ extension ListViewController {
                 diary: data,
                 weatherImageUseCase: DefaultLoadWeatherImageUseCase(
                     weatherAPIRepository: DefaultWeatherAPIRepository()
-                )
+                ),
+                cacheUseCase: self.viewModel.cacheUseCase
             )
             
             cell.setupViewModel(cellViewModel)

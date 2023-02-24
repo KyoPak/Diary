@@ -10,6 +10,7 @@ import Foundation
 final class ListViewModel {
     private let fetchUseCase: FetchDiaryReportsUseCase
     private let deleteUseCase: DeleteDiaryReportUseCase
+    private(set) var cacheUseCase: CheckCacheUseCase
     
     private var diaryReports: [DiaryReport] = [] {
         didSet {
@@ -32,9 +33,14 @@ final class ListViewModel {
     
     weak var errorDelegate: ErrorPresentable?
     
-    init(fetchUseCase: FetchDiaryReportsUseCase, deleteUseCase: DeleteDiaryReportUseCase) {
+    init(
+        fetchUseCase: FetchDiaryReportsUseCase,
+        deleteUseCase: DeleteDiaryReportUseCase,
+        cacheUseCase: CheckCacheUseCase
+    ) {
         self.fetchUseCase = fetchUseCase
         self.deleteUseCase = deleteUseCase
+        self.cacheUseCase = cacheUseCase
     }
     
     private func fetchData() {
@@ -67,7 +73,6 @@ extension ListViewModel {
     }
     
     func setupFilterText(_ text: String) {
-        print(text)
         filterDiaryReports = diaryReports.filter({ diaryReport in
             diaryReport.contentText.lowercased().contains(text)
         })
