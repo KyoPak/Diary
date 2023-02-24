@@ -21,7 +21,9 @@ final class ConcreteAlertBuilder: AlertBuilder {
     }
     
     func setupStyle(_ style: UIAlertController.Style) -> AlertBuilder {
+        let actions = alert.actions
         alert = UIAlertController(title: alert.title, message: alert.message, preferredStyle: style)
+        actions.forEach(alert.addAction(_:))
         return self
     }
     
