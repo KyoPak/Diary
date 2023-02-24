@@ -1,5 +1,6 @@
 # Diary Refactoring ReadME
 
+# Diary ReadME
 - MVC를 기반으로 팀원과 만든 Diary앱을 개인적으로 MVVM-C로 Refactoring하였습니다.
 - 텍스트 기능을 구현 할 때, 아이폰 `메모` 앱의 텍스트 입력 로직을 참고하였습니다.
 
@@ -134,12 +135,13 @@
 </details>
 
 ### 👟 Refactoring MVVM-C: Personal
-기간 : 2023/02/19 ~ 2023/02/24
+기간 : 2023/02/19 ~ 2023/02/25
 
 - ✅ MVVM Architecture 사용
-- ✅ Coordinator Pattern  사용
+- ✅ Coordinator 패턴 사용
 - ✅ Clean Architecture 사용
 - ✅ SearchBar 구현
+- ✅ Builder 패턴 사용하여 Alert 관리
 
 
 
@@ -190,67 +192,16 @@
 </details>
  
  
+### ▶️ Personal - Refactoring 실행화면
+
+|**사용**|**Search**|**Dark 모드**|
+|:---:|:---:|:---:|
+|<img width = 600, src = https://i.imgur.com/yr4RG51.gif>|<img width = 600, src = https://i.imgur.com/cDWOynB.gif>|<img width = 600, src = https://i.imgur.com/R1UhMw2.gif>|
+
+
 ## 폴더 구조
 ```
 ├── Diary
-│   ├── Resource
-│   └── Source
-│   |   ├── Application
-│   |   │   ├── AppDelegate.swift
-│   |   │   └── SceneDelegate.swift
-│   |   ├── Coordinator
-│   |   │   ├── Coordinator.swift
-│   |   │   ├── DetailCoordinator.swift
-│   |   │   ├── ListCoordinator.swift
-│   |   │   └── MainCoordinator.swift
-│   |   ├── Data
-│   |   │   └── Repository
-│   |   │       ├── CoreData
-│   |   │       │   ├── DefaultCoreDataRepository.swift
-│   |   │       │   ├── DiaryData+CoreDataClass.swift
-│   |   │       │   ├── DiaryData+CoreDataProperties.swift
-│   |   │       │   ├── WeatherData+CoreDataClass.swift
-│   |   │       │   └── WeatherData+CoreDataProperties.swift
-│   |   │       └── WeatherAPI
-│   |   │           ├── DefaultWeatherAPIRepository.swift
-│   |   │           ├── NetworkRequest.swift
-│   |   │           └── WeatherAPIData.swift
-│   |   ├── Domain
-│   |   │   ├── Entity
-│   |   │   │   ├── CurrentWeather.swift
-│   |   │   │   ├── DecoderManager.swift
-│   |   │   │   └── DiaryReport.swift
-│   |   │   ├── RepositoryProtocol
-│   |   │   │   ├── CoreDataRepository.swift
-│   |   │   │   └── WeatherAPIRepository.swift
-│   |   │   └── UseCase
-│   |   │       ├── DeleteDiaryReportUseCase.swift
-│   |   │       ├── FetchDiaryReportsUseCase.swift
-│   |   │       ├── FetchWeatherDataUseCase.swift
-│   |   │       ├── LoadWeatherImageUseCase.swift
-│   |   │       └── SaveDiaryReportUseCase.swift
-│   |   ├── Presentation
-│   |   │   ├── DetailScene
-│   |   │   │   ├── View
-│   |   │   │   │   ├── DetailViewController.swift
-│   |   │   │   │   └── NavigationView.swift
-│   |   │   │   └── ViewModel
-│   |   │   │       └── DetailViewModel.swift
-│   |   │   └── Scene
-│   |   │       ├── View
-│   |   │       │   ├── ListCell.swift
-│   |   │       │   └── ListViewController.swift
-│   |   │       └── ViewModel
-│   |   │           ├── CellViewModel.swift
-│   |   │           └── ListViewModel.swift
-│   |   └── Util
-│   |       ├── Constant
-│   |       │   └── Error.swift
-│   |       └── Extensions
-│   |           ├── Formatter+Extension.swift
-│   |           ├── NSMutableAttributedString+Extension.swift
-│   |           ├── UIComponent+Extension.swift
-│   |           └── UIViewController+Extension.swift
 │   ├── Diary.xcdatamodeld
 │   │   ├── Diary.xcdatamodel
 │   │   │   └── contents
@@ -258,8 +209,78 @@
 │   │   │   └── contents
 │   │   └── Diary_v3.xcdatamodel
 │   │       └── contents
-│   └── MappingModelV2ToV3.xcmappingmodel
-│       └── xcmapping.xml
+│   ├── MappingModelV2ToV3.xcmappingmodel
+│   │   └── xcmapping.xml
+│   ├── Resource
+│   └── Source
+│       ├── AlertBuilder
+│       │   ├── AlertBuilder.swift
+│       │   ├── AlertDirector.swift
+│       │   └── ConcreteAlertBuilder.swift
+│       ├── Application
+│       │   ├── AppDelegate.swift
+│       │   └── SceneDelegate.swift
+│       ├── Coordinator
+│       │   ├── Coordinator.swift
+│       │   ├── DetailCoordinator.swift
+│       │   ├── ListCoordinator.swift
+│       │   └── MainCoordinator.swift
+│       ├── Data
+│       │   └── Repository
+│       │       ├── Cache
+│       │       │   └── DefaultCacheRepository.swift
+│       │       ├── CoreData
+│       │       │   ├── DefaultCoreDataRepository.swift
+│       │       │   ├── DiaryData+CoreDataClass.swift
+│       │       │   ├── DiaryData+CoreDataProperties.swift
+│       │       │   ├── WeatherData+CoreDataClass.swift
+│       │       │   └── WeatherData+CoreDataProperties.swift
+│       │       └── WeatherAPI
+│       │           ├── DefaultWeatherAPIRepository.swift
+│       │           ├── NetworkRequest.swift
+│       │           └── WeatherAPIData.swift
+│       ├── Domain
+│       │   ├── Entity
+│       │   │   ├── CurrentWeather.swift
+│       │   │   ├── DecoderManager.swift
+│       │   │   ├── DiaryReport.swift
+│       │   │   └── WrapperData.swift
+│       │   ├── RepositoryProtocol
+│       │   │   ├── CacheRepository.swift
+│       │   │   ├── CoreDataRepository.swift
+│       │   │   └── WeatherAPIRepository.swift
+│       │   └── UseCase
+│       │       ├── CheckCacheUseCase.swift
+│       │       ├── DeleteDiaryReportUseCase.swift
+│       │       ├── FetchDiaryReportsUseCase.swift
+│       │       ├── FetchWeatherDataUseCase.swift
+│       │       ├── LoadWeatherImageUseCase.swift
+│       │       └── SaveDiaryReportUseCase.swift
+│       ├── Presentation
+│       │   ├── DetailScene
+│       │   │   ├── View
+│       │   │   │   ├── DetailViewController.swift
+│       │   │   │   └── NavigationView.swift
+│       │   │   └── ViewModel
+│       │   │       └── DetailViewModel.swift
+│       │   ├── Protocol
+│       │   │   ├── ErrorPresentable.swift
+│       │   │   └── ViewIdentifiable.swift
+│       │   └── Scene
+│       │       ├── View
+│       │       │   ├── ListCell.swift
+│       │       │   └── ListViewController.swift
+│       │       └── ViewModel
+│       │           ├── CellViewModel.swift
+│       │           └── ListViewModel.swift
+│       └── Util
+│           ├── Constant
+│           │   └── Error.swift
+│           └── Extensions
+│               ├── Formatter+Extension.swift
+│               ├── NSMutableAttributedString+Extension.swift
+│               ├── UIComponent+Extension.swift
+│               └── UIViewController+Extension.swift
 ├── Podfile
 ├── Podfile.lock
 └── README.md
@@ -273,6 +294,7 @@
 펼쳐보기
 </summary>
 
+추후 작성
 
 </details>
 
@@ -282,6 +304,7 @@
 펼쳐보기
 </summary>
 
+추후 작성
 
 </details>
 
@@ -291,7 +314,7 @@
 펼쳐보기
 </summary>
 
-도입 이유
+사용 이유
 - `CoreDataRepository`의 객체를 UseCase마다 여러 번 생성하다보니 `persistentContainer`의 중복이 발생하여 정상 동작하지만 warning이 발생하였습니다.
     하나의 코어데이터 객체를 공유하려다보니 각 UseCase에서 `CoreDataRepository` 객체에 대한 접근제어를 낮추거나 해당 객체를 반환하여 다른 viewModel에 전달해줘야 하는 로직이 필요하였습니다.
     이런 로직은 매우 부자연스럽다고 생각이 들었고, `Coordinator`를 사용하여 해당되는 `Coordinator`에서 뷰의 이동시에 Repository 객체를 전달하여 viewModel에 주입해주면 좋다는 생각이 들었습니다.<br></br>
@@ -299,6 +322,32 @@
 느낀 점
  - `Coordinator`를 사용해보니 뷰의 이동에 대한 로직이 굉장히 깔끔해졌다고 생각이들었습니다. 또한 `ViewController(View)`에서 화면이동 및 다음 화면의 `ViewModel`을 주입해줘야하는 책임이 없어지다보니 코드가 한결 간결해졌습니다.
     향후 앱의 규모가 커져서 하나의 View에서 이동해야 할 View가 많을 때 보다 효과적이고 좋은 확장성을 가질 수 있을 것이라고 생각이 들었습니다.
+    
+</details>
+
+### ⚙️ Search Bar 
+
+<details>
+<summary> 
+펼쳐보기
+</summary>
+
+사용 이유
+- 데이터가 매우 많아질 경우 User가 작성한 일기를 찾기 힘들것이라 판단되어 사용하였습니다.
+- SearchBar에서 text를 입력할 때마다 ListViewModel에서 입력된 text가 포함된 content만을 보여줄 수 있도록 필터링을 하여 `filterDiaryReports`라는 프로퍼티에 필터링된 데이터를 넣어주었습니다.
+- 해당 데이터를 view에 보여줄 수 있도록 바인딩 된 메서드가 조건에 맞는 호출이 되도록 구현하였습니다.
+
+```swift
+private var filterDiaryReports: [DiaryReport] = [] {
+    didSet {
+        if filterDiaryReports.isEmpty {
+            dataHandler?(diaryReports)
+        } else {
+            dataHandler?(filterDiaryReports)
+        }
+    }
+}
+```
     
 </details>
 
@@ -627,16 +676,6 @@ navigationController?.navigationBar.prefersLargeTitles = true
 navigationItem.largeTitleDisplayMode = .never
 ```
 
-    
-</details>
-
-### 🔥 Search Bar 
-
-<details>
-<summary> 
-펼쳐보기
-</summary>
- 
     
 </details>
 
