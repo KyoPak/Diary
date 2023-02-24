@@ -23,7 +23,8 @@ final class ListCoordinator: Coordinator {
     func start() {
         let viewModel = ListViewModel(
             fetchUseCase: DefaultFetchDiaryReportsUseCase(coreDataRepository: coreDataRepository),
-            deleteUseCase: DefaultDeleteDiaryReportUseCase(coreDataRepository: coreDataRepository)
+            deleteUseCase: DefaultDeleteDiaryReportUseCase(coreDataRepository: coreDataRepository),
+            cacheUseCase: DefaultCacheCheckUseCase(cacheRepository: DefaultCacheRepository())
         )
         
         let viewController = ListViewController(viewModel: viewModel)
