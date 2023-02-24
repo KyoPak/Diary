@@ -21,13 +21,6 @@ final class ListViewController: UIViewController {
     
     private let viewModel: ListViewModel
     
-    private var isFiltering: Bool {
-        let searchController = navigationItem.searchController
-        let isActive = searchController?.isActive ?? false
-        let isSearchBarHasText = searchController?.searchBar.text?.isEmpty == false
-        return isActive && isSearchBarHasText
-    }
-    
     private lazy var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: configureLayout()
