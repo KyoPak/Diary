@@ -7,14 +7,6 @@
 
 import UIKit
 
-protocol ViewIdentifiable where Self: UIView { }
-
-extension ViewIdentifiable {
-    static var identifiable: String {
-        return String.init(describing: self)
-    }
-}
-
 final class ListCell: UICollectionViewListCell {
     private var viewModel: CellViewModel?
     

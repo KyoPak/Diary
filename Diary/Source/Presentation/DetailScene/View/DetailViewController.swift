@@ -118,6 +118,14 @@ extension DetailViewController: UITextViewDelegate {
     }
 }
 
+// MARK: - Present Error Alert
+extension DetailViewController: ErrorPresentable {
+    func presentErrorAlert(title: String, message: String) {
+        let alertDirector = AlertDirector()
+        present(alertDirector.setupAlert(title: title, message: message), animated: true)
+    }
+}
+
 // MARK: - Action, Present
 extension DetailViewController {
     @objc private func optionButtonTapped() {

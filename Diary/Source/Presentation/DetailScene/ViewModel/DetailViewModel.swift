@@ -22,6 +22,8 @@ final class DetailViewModel {
     
     private var diary: DiaryReport
     
+    weak var errorDelegate: ErrorPresentable?
+    
     init(
         data: DiaryReport?,
         fetchWeatherDataUseCase: FetchWeatherDataUseCase,
@@ -47,6 +49,14 @@ final class DetailViewModel {
         }
         diary = data
     }
+    
+    private func sendError(error: Error) {
+        guard let error = error as? DataError else { return }
+        errorDelegate?.presentErrorAlert(
+            title: error.description,
+            message: error.errorDescription ?? ""
+        )
+    }
 }
 
 extension DetailViewModel {
@@ -65,7 +75,7 @@ extension DetailViewModel {
         do {
             try createDiaryDataUseCase.updateData(data: diary)
         } catch {
-            print(error)
+            sendError(error: error)
         }
     }
     
@@ -73,7 +83,7 @@ extension DetailViewModel {
         do {
             try deleteUseCase.deleteData(id: diary.id)
         } catch {
-            print(error)
+            sendError(error: error)
         }
     }
     
@@ -86,7 +96,7 @@ extension DetailViewModel {
         do {
             try deleteUseCase.deleteData(id: diary.id)
         } catch {
-            print(error)
+            sendError(error: error)
         }
     }
     

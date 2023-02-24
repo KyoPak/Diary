@@ -111,6 +111,14 @@ extension ListViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - Present Error Alert
+extension ListViewController: ErrorPresentable {
+    func presentErrorAlert(title: String, message: String) {
+        let alertDirector = AlertDirector()
+        present(alertDirector.setupAlert(title: title, message: message), animated: true)
+    }
+}
+
 // MARK: - UIAction
 extension ListViewController {
     @objc private func addButtonTapped() {

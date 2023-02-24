@@ -30,6 +30,8 @@ final class ListViewModel {
     private var dataHandler: (([DiaryReport]) -> Void)?
     private var filterDataHandler: (([DiaryReport]) -> Void)?
     
+    weak var errorDelegate: ErrorPresentable?
+    
     init(fetchUseCase: FetchDiaryReportsUseCase, deleteUseCase: DeleteDiaryReportUseCase) {
         self.fetchUseCase = fetchUseCase
         self.deleteUseCase = deleteUseCase
@@ -48,8 +50,10 @@ final class ListViewModel {
     
     private func sendError(error: Error) {
         guard let error = error as? DataError else { return }
-        print(error)
-        // TODO: Delegate 호출하여 얼럿 팝업
+        errorDelegate?.presentErrorAlert(
+            title: error.description,
+            message: error.errorDescription ?? ""
+        )
     }
 }
 
