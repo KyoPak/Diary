@@ -97,7 +97,6 @@ extension DetailViewController: UITextViewDelegate {
             textView.text = viewModel.checkTextViewPlaceHolder()
             textView.textColor = .systemGray
         }
-        viewModel.saveData(contents: textView.text)
     }
     
     func textViewDidChange(_ textView: UITextView) {
