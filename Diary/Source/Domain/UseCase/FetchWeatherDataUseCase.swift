@@ -47,9 +47,10 @@ extension DefaultFetchWeatherDataUseCase: FetchWeatherDataUseCase {
         completion: @escaping (CurrentWeather) -> Void
     ) {
         
-        guard let url = NetworkRequest.fetchData(lat: lat, lon: lon).generateURL() else { return }
-                
-        networkRepository.fetch(url: url) { [weak self] result in
+        guard let request = try? NetworkRequest.fetchData(lat: lat, lon: lon).generateRequest()
+        else { return }
+        
+        networkRepository.fetch(request: request) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.convertWeatherData(data) { (iconID, main) in

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NetworkRepository {
-    func fetch(url: URL, completion: @escaping (Result<Data, SessionError>) -> Void)
+    func fetch(request: URLRequest, completion: @escaping (Result<Data, SessionError>) -> Void)
 }

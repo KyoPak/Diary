@@ -8,13 +8,10 @@
 import Foundation
 
 final class DefaultNetworkRepository: NetworkRepository {
-    func fetch(url: URL, completion: @escaping (Result<Data, SessionError>) -> Void) {
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "GET"
-        
+    func fetch(request: URLRequest, completion: @escaping (Result<Data, SessionError>) -> Void) {
         let sesseion = URLSession(configuration: .default)
         
-        sesseion.dataTask(with: urlRequest) { data, response, error in
+        sesseion.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 completion(.failure(.networkError))
                 return
