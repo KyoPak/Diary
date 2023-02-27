@@ -25,15 +25,15 @@ final class DetailCoordinator: Coordinator {
     }
     
     func start() {
-        let weatherAPIRepository = DefaultWeatherAPIRepository()
+        let networkRepository = DefaultNetworkRepository()
         
         let viewModel = DetailViewModel(
             data: data,
             fetchWeatherDataUseCase: DefaultFetchWeatherDataUseCase(
-                weatherAPIRepository: weatherAPIRepository
+                networkRepository: networkRepository
             ),
             weatherImageUseCase: DefaultLoadWeatherImageUseCase(
-                weatherAPIRepository: weatherAPIRepository
+                networkRepository: networkRepository
             ),
             createDiaryUseCase: DefaultSaveDiaryReportUseCase(
                 coreDataRepository: coreDataRepository

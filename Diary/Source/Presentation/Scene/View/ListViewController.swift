@@ -76,7 +76,7 @@ extension ListViewController {
             let cellViewModel = CellViewModel(
                 diary: data,
                 weatherImageUseCase: DefaultLoadWeatherImageUseCase(
-                    weatherAPIRepository: DefaultWeatherAPIRepository()
+                    networkRepository: DefaultNetworkRepository()
                 ),
                 cacheUseCase: self.viewModel.cacheUseCase
             )
