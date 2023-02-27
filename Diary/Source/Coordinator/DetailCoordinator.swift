@@ -25,7 +25,7 @@ final class DetailCoordinator: Coordinator {
     }
     
     func start() {
-        let networkRepository = DefaultNetworkRepository()
+        let networkRepository = DefaultNetworkRepository(networkService: DefaultNetworkSevice())
         
         let viewModel = DetailViewModel(
             data: data,

@@ -73,10 +73,13 @@ extension ListViewController {
                 return errorCell
             }
             
+            //TODO: 수정 필요
+            let networkRepository = DefaultNetworkRepository(networkService: DefaultNetworkSevice())
+            
             let cellViewModel = CellViewModel(
                 diary: data,
                 weatherImageUseCase: DefaultLoadWeatherImageUseCase(
-                    networkRepository: DefaultNetworkRepository()
+                    networkRepository: networkRepository
                 ),
                 cacheUseCase: self.viewModel.cacheUseCase
             )

@@ -7,8 +7,12 @@
 
 import Foundation
 
-final class DefaultNetworkRepository: NetworkRepository {
-    func fetch(request: URLRequest, completion: @escaping (Result<Data, SessionError>) -> Void) {
+protocol NetworkSevice {
+    func request(_ request: URLRequest, completion: @escaping (Result<Data, SessionError>) -> Void)
+}
+
+final class DefaultNetworkSevice: NetworkSevice {
+    func request(_ request: URLRequest, completion: @escaping (Result<Data, SessionError>) -> Void) {
         let sesseion = URLSession(configuration: .default)
         
         sesseion.dataTask(with: request) { data, response, error in
