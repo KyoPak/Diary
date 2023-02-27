@@ -29,7 +29,7 @@ enum NetworkRequest {
         }
     }
     
-    var queryItems: [URLQueryItem] {
+    private var queryItems: [URLQueryItem] {
         switch self {
         case .fetchData(let lat, let lon):
             return [
