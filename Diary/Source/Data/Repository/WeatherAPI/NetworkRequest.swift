@@ -42,11 +42,21 @@ enum NetworkRequest {
         }
     }
     
-    func generateURL() -> URL? {
+    private var privateURL: URL? {
         var urlComponent = URLComponents(string: baseURL)
         urlComponent?.path = path
         urlComponent?.queryItems = queryItems
         
         return urlComponent?.url
+    }
+    
+    func generateRequest() throws -> URLRequest {
+        guard let url = privateURL else { throw SessionError.urlError }
+        var request = URLRequest(url: url)
+        
+        // This project use only "GET"
+        request.httpMethod = "GET"
+        
+        return request
     }
 }
