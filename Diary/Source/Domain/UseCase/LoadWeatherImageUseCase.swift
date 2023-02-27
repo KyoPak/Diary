@@ -19,9 +19,9 @@ final class DefaultLoadWeatherImageUseCase: LoadWeatherImageUseCase {
     }
     
     func loadImage(id: String, completion: @escaping (Data) -> Void) {
-        guard let url = NetworkRequest.loadImage(id: id).generateURL() else { return }
+        guard let request = try? NetworkRequest.loadImage(id: id).generateRequest() else { return }
         
-        networkRepository.fetch(url: url) { result in
+        networkRepository.fetch(request: request) { result in
             switch result {
             case .success(let data):
                 completion(data)
