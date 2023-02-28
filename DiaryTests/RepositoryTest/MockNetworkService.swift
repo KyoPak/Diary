@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MockNetworkService: NetworkSevice {
+final class MockNetworkService: NetworkSevice {
     var data: Data?
     var error: SessionError?
     
