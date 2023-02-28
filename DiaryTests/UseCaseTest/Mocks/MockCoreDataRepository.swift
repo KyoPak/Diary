@@ -64,17 +64,18 @@ final class MockCoreDataRepository: CoreDataRepository {
     }
 
     func delete(id: UUID, completion: @escaping (DataError?) -> Void) {
-        var flag = false
-        diaryReports.forEach { data in
-            if data.id == id {
-                flag = true
+        var tempIndex = datas.count + 1
+        for index in 0..<datas.count {
+            if datas[index].id == id {
+                tempIndex = index
             }
         }
-
-        if !flag {
+        
+        if tempIndex == datas.count + 1 {
             completion(.deleteError)
         } else {
-            completion(nil)
+            datas.remove(at: tempIndex)
+            diaryReports.remove(at: tempIndex)
         }
     }
 }

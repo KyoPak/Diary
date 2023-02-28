@@ -70,6 +70,8 @@
 		3CE8A8FA29A8BDAD00ECC30A /* CheckCacheUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8F929A8BDAD00ECC30A /* CheckCacheUseCase.swift */; };
 		3CE8A8FC29A8BDFA00ECC30A /* CacheRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8FB29A8BDFA00ECC30A /* CacheRepository.swift */; };
 		3CE8A8FE29A8BE1900ECC30A /* WrapperData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8FD29A8BE1900ECC30A /* WrapperData.swift */; };
+		3CEAE50029AE437A00F1F759 /* DeleteDiaryReportUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEAE4FF29AE437A00F1F759 /* DeleteDiaryReportUseCaseTest.swift */; };
+		3CEAE50129AE438500F1F759 /* DeleteDiaryReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C66C3C629A2617000972F5A /* DeleteDiaryReportUseCase.swift */; };
 		3CF2D00129ACD7E5009A7E12 /* DefaultNetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF2D00029ACD7E5009A7E12 /* DefaultNetworkRepository.swift */; };
 		C739AE25284DF28600741E8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739AE24284DF28600741E8F /* AppDelegate.swift */; };
 		C739AE27284DF28600741E8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739AE26284DF28600741E8F /* SceneDelegate.swift */; };
@@ -143,6 +145,7 @@
 		3CE8A8F929A8BDAD00ECC30A /* CheckCacheUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCacheUseCase.swift; sourceTree = "<group>"; };
 		3CE8A8FB29A8BDFA00ECC30A /* CacheRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheRepository.swift; sourceTree = "<group>"; };
 		3CE8A8FD29A8BE1900ECC30A /* WrapperData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperData.swift; sourceTree = "<group>"; };
+		3CEAE4FF29AE437A00F1F759 /* DeleteDiaryReportUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDiaryReportUseCaseTest.swift; sourceTree = "<group>"; };
 		3CF2D00029ACD7E5009A7E12 /* DefaultNetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkRepository.swift; sourceTree = "<group>"; };
 		4221CF187888BE8480EE92C5 /* Pods_Diary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Diary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E05864E63AC2CB2749DE4D /* Pods-Diary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Diary.release.xcconfig"; path = "Target Support Files/Pods-Diary/Pods-Diary.release.xcconfig"; sourceTree = "<group>"; };
@@ -315,6 +318,7 @@
 			children = (
 				3CB723D129AE2CCF00C00A20 /* FetchDiaryReportsUseCaseTest.swift */,
 				3CB723D829AE31CB00C00A20 /* SaveDiaryReportUseCaseTest.swift */,
+				3CEAE4FF29AE437A00F1F759 /* DeleteDiaryReportUseCaseTest.swift */,
 				3CB723D729AE2DBB00C00A20 /* Mocks */,
 			);
 			path = UseCaseTest;
@@ -669,6 +673,7 @@
 				3CB723C029AE2B0900C00A20 /* NetworkSevice.swift in Sources */,
 				3CB723C129AE2B0D00C00A20 /* DiaryReport.swift in Sources */,
 				3CB723CC29AE2B8D00C00A20 /* DiaryData+CoreDataProperties.swift in Sources */,
+				3CEAE50029AE437A00F1F759 /* DeleteDiaryReportUseCaseTest.swift in Sources */,
 				3CB723C929AE2B7F00C00A20 /* WrapperData.swift in Sources */,
 				3CB723B629AE298B00C00A20 /* NetworkRepositoryTests.swift in Sources */,
 				3CB723C229AE2B1000C00A20 /* CurrentWeather.swift in Sources */,
@@ -679,6 +684,7 @@
 				3CB723CF29AE2BA800C00A20 /* CoreDataRepository.swift in Sources */,
 				3CB723C829AE2B5D00C00A20 /* WeatherAPIData.swift in Sources */,
 				3CB723DA29AE31FB00C00A20 /* SaveDiaryReportUseCase.swift in Sources */,
+				3CEAE50129AE438500F1F759 /* DeleteDiaryReportUseCase.swift in Sources */,
 				3CB723C529AE2B2700C00A20 /* FetchDiaryReportsUseCase.swift in Sources */,
 				3CB723CD29AE2B9100C00A20 /* WeatherData+CoreDataClass.swift in Sources */,
 				3CB723BF29AE2B0500C00A20 /* DefaultCoreDataRepository.swift in Sources */,
