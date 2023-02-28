@@ -33,7 +33,7 @@ final class FetchDiaryReportsUseCaseTest: XCTestCase {
             data: DiaryReport(id: UUID(), contentText: "test2", createdAt: Date(), weather: CurrentWeather())
         )
         // when
-        let expectation = XCTestExpectation(description: "Completion")
+        let expectation = XCTestExpectation(description: "Content, count 확인")
         fetchDiaryUseCase.fetchData { result in
             // then
             switch result {
