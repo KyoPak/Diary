@@ -25,9 +25,7 @@ final class DefaultSaveDiaryReportUseCase: SaveDiaryReportUseCase {
     
     func updateData(_ data: DiaryReport, completion: @escaping (DataError?) -> Void) {
         coreDataRepository.update(id: data.id, contentText: data.contentText) { error in
-            if let error = error {
-                completion(error)
-            }
+            completion(error)
         }
     }
 }
