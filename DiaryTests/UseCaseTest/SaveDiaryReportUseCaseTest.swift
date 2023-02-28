@@ -26,14 +26,13 @@ final class SaveDiaryReportUseCaseTest: XCTestCase {
     }
     
     func test_createData_success() {
-        //given
+        //given, when
         saveDiaryUseCase.createData(DiaryReport(id: UUID(), contentText: "test1", createdAt: Date(), weather: CurrentWeather()))
         
         let expectation = XCTestExpectation(description: "Count, Content 확인")
         
-        //when
+        //then
         coreDataRepository.fetch { result in
-            //then
             switch result {
             case .success(let datas):
                 XCTAssertEqual(datas.count, 1)
