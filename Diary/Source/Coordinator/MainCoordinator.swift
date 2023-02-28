@@ -11,18 +11,22 @@ final class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     var coreDataRepository: CoreDataRepository
+    var networkRepository: NetworkRepository
     
     init(navigationController: UINavigationController,
-         coreDataRepository: CoreDataRepository
+         coreDataRepository: CoreDataRepository,
+         networkRepository: NetworkRepository
     ) {
         self.navigationController = navigationController
         self.coreDataRepository = coreDataRepository
+        self.networkRepository = networkRepository
     }
     
     func start() {
         let listCoordinator = ListCoordinator(
             navigationController: navigationController,
-            coreDataRepository: coreDataRepository
+            coreDataRepository: coreDataRepository,
+            networkRepository: networkRepository
         )
         
         listCoordinator.parentCoordinator = self

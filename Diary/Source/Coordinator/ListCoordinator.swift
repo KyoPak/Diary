@@ -12,12 +12,15 @@ final class ListCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     var coreDataRepository: CoreDataRepository
+    var networkRepository: NetworkRepository
     
     init(navigationController: UINavigationController,
-         coreDataRepository: CoreDataRepository
+         coreDataRepository: CoreDataRepository,
+         networkRepository: NetworkRepository
     ) {
         self.navigationController = navigationController
         self.coreDataRepository = coreDataRepository
+        self.networkRepository = networkRepository
     }
     
     func start() {
@@ -40,6 +43,7 @@ final class ListCoordinator: Coordinator {
         let detailCoordinator = DetailCoordinator(
             navigationController: navigationController,
             coreDataRepository: coreDataRepository,
+            networkRepository: networkRepository,
             data: data
         )
         detailCoordinator.parentCoordinator = self

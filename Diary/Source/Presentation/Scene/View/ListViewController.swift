@@ -67,14 +67,11 @@ extension ListViewController {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: ListCell.identifiable,
                 for: indexPath
-            ) as? ListCell else {
+            ) as? ListCell, let networkRepository = self.coordinator?.networkRepository else {
                 
                 let errorCell = UICollectionViewCell()
                 return errorCell
             }
-            
-            //TODO: 수정 필요
-            let networkRepository = DefaultNetworkRepository(networkService: DefaultNetworkSevice())
             
             let cellViewModel = CellViewModel(
                 diary: data,

@@ -12,21 +12,22 @@ final class DetailCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     var coreDataRepository: CoreDataRepository
+    var networkRepository: NetworkRepository
     
     private var data: DiaryReport?
     
     init(navigationController: UINavigationController,
          coreDataRepository: CoreDataRepository,
+         networkRepository: NetworkRepository,
          data: DiaryReport?
     ) {
         self.navigationController = navigationController
         self.coreDataRepository = coreDataRepository
+        self.networkRepository = networkRepository
         self.data = data
     }
     
     func start() {
-        let networkRepository = DefaultNetworkRepository(networkService: DefaultNetworkSevice())
-        
         let viewModel = DetailViewModel(
             data: data,
             fetchWeatherDataUseCase: DefaultFetchWeatherDataUseCase(
