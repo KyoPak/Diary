@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         let navigationController = UINavigationController()
-        let coreDataRepository = DefaultCoreDataRepository()
+        let coreDataRepository = DefaultCoreDataRepository(coreDataService: DefaultCoreDataService())
 
         let coordinator = MainCoordinator(
             navigationController: navigationController,

@@ -9,7 +9,7 @@ import Foundation
 
 protocol SaveDiaryReportUseCase {
     func createData(data: DiaryReport)
-    func updateData(data: DiaryReport) throws
+    func updateData(data: DiaryReport, completion: @escaping (DataError?) -> Void)
 }
 
 final class DefaultSaveDiaryReportUseCase: SaveDiaryReportUseCase {
@@ -23,13 +23,10 @@ final class DefaultSaveDiaryReportUseCase: SaveDiaryReportUseCase {
         coreDataRepository.create(data: data)
     }
     
-    func updateData(data: DiaryReport) throws {
-        
-        do {
-            try coreDataRepository.update(id: data.id, contentText: data.contentText)
-        } catch {
-            if let error = error as? DataError {
-                throw error
+    func updateData(data: DiaryReport, completion: @escaping (DataError?) -> Void) {
+        coreDataRepository.update(id: data.id, contentText: data.contentText) { error in
+            if let error = error {
+                completion(error)
             }
         }
     }

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C0AE9E5295D40D800D2D473 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0AE9E4295D40D800D2D473 /* NSMutableAttributedString+Extension.swift */; };
 		3C293FB229A127BC00F65CF1 /* DiaryReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C293FB129A127BC00F65CF1 /* DiaryReport.swift */; };
-		3C293FB729A1283D00F65CF1 /* DefaultCoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C293FB629A1283D00F65CF1 /* DefaultCoreDataRepository.swift */; };
+		3C293FB729A1283D00F65CF1 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C293FB629A1283D00F65CF1 /* CoreDataService.swift */; };
 		3C293FB929A1285000F65CF1 /* NetworkSevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C293FB829A1285000F65CF1 /* NetworkSevice.swift */; };
 		3C3D08882952A60D007DB5E7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D08872952A60D007DB5E7 /* .swiftlint.yml */; };
 		3C59F5F32950A8AF0045C66A /* Formatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C59F5F22950A8AF0045C66A /* Formatter+Extension.swift */; };
@@ -25,6 +25,7 @@
 		3C8DF31D29A3C27B009F0889 /* SaveDiaryReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF31C29A3C27B009F0889 /* SaveDiaryReportUseCase.swift */; };
 		3C8DF32229A4D21B009F0889 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF32129A4D21B009F0889 /* NavigationView.swift */; };
 		3CB3524329ACF23700CC71D8 /* WeatherAPIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB3524229ACF23700CC71D8 /* WeatherAPIData.swift */; };
+		3CB3524529ACF34A00CC71D8 /* DefaultCoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB3524429ACF34A00CC71D8 /* DefaultCoreDataRepository.swift */; };
 		3CBA423B29A36E54007D6B7A /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA423A29A36E54007D6B7A /* CellViewModel.swift */; };
 		3CC8D58029A120F3002982D3 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC8D57F29A120F3002982D3 /* ListViewController.swift */; };
 		3CC8D58229A12107002982D3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC8D58129A12107002982D3 /* ListViewModel.swift */; };
@@ -64,7 +65,7 @@
 /* Begin PBXFileReference section */
 		3C0AE9E4295D40D800D2D473 /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		3C293FB129A127BC00F65CF1 /* DiaryReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryReport.swift; sourceTree = "<group>"; };
-		3C293FB629A1283D00F65CF1 /* DefaultCoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCoreDataRepository.swift; sourceTree = "<group>"; };
+		3C293FB629A1283D00F65CF1 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		3C293FB829A1285000F65CF1 /* NetworkSevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSevice.swift; sourceTree = "<group>"; };
 		3C3D08872952A60D007DB5E7 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		3C59F5F22950A8AF0045C66A /* Formatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extension.swift"; sourceTree = "<group>"; };
@@ -80,6 +81,7 @@
 		3C8DF31C29A3C27B009F0889 /* SaveDiaryReportUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDiaryReportUseCase.swift; sourceTree = "<group>"; };
 		3C8DF32129A4D21B009F0889 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		3CB3524229ACF23700CC71D8 /* WeatherAPIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIData.swift; sourceTree = "<group>"; };
+		3CB3524429ACF34A00CC71D8 /* DefaultCoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCoreDataRepository.swift; sourceTree = "<group>"; };
 		3CBA423A29A36E54007D6B7A /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		3CC8D57F29A120F3002982D3 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		3CC8D58129A12107002982D3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				3CF2D00029ACD7E5009A7E12 /* DefaultNetworkRepository.swift */,
+				3CB3524429ACF34A00CC71D8 /* DefaultCoreDataRepository.swift */,
 				3CE8A8F629A8BD4F00ECC30A /* Cache */,
 				3C293FB529A1282700F65CF1 /* Network */,
 				3C293FB429A1281E00F65CF1 /* CoreData */,
@@ -159,7 +162,7 @@
 		3C293FB429A1281E00F65CF1 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				3C293FB629A1283D00F65CF1 /* DefaultCoreDataRepository.swift */,
+				3C293FB629A1283D00F65CF1 /* CoreDataService.swift */,
 				F6415B672966666800DC81C4 /* DiaryData+CoreDataClass.swift */,
 				F6415B682966666800DC81C4 /* DiaryData+CoreDataProperties.swift */,
 				F6415B692966666800DC81C4 /* WeatherData+CoreDataClass.swift */,
@@ -560,7 +563,7 @@
 				FCEA9EC929545A4200ACA37D /* UIComponent+Extension.swift in Sources */,
 				3C8DF32229A4D21B009F0889 /* NavigationView.swift in Sources */,
 				C739AE25284DF28600741E8F /* AppDelegate.swift in Sources */,
-				3C293FB729A1283D00F65CF1 /* DefaultCoreDataRepository.swift in Sources */,
+				3C293FB729A1283D00F65CF1 /* CoreDataService.swift in Sources */,
 				3CBA423B29A36E54007D6B7A /* CellViewModel.swift in Sources */,
 				3C66C3CA29A2634100972F5A /* CoreDataRepository.swift in Sources */,
 				3CE8A8F129A899AA00ECC30A /* ViewIdentifiable.swift in Sources */,
@@ -580,6 +583,7 @@
 				3CE8A8E329A7923B00ECC30A /* MainCoordinator.swift in Sources */,
 				F6415B6D2966666800DC81C4 /* WeatherData+CoreDataClass.swift in Sources */,
 				3C8DF31629A39EF1009F0889 /* FetchWeatherDataUseCase.swift in Sources */,
+				3CB3524529ACF34A00CC71D8 /* DefaultCoreDataRepository.swift in Sources */,
 				3CB3524329ACF23700CC71D8 /* WeatherAPIData.swift in Sources */,
 				3CE8A8E129A773A800ECC30A /* Coordinator.swift in Sources */,
 				3C66C3C729A2617000972F5A /* DeleteDiaryReportUseCase.swift in Sources */,

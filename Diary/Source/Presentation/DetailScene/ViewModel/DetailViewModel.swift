@@ -72,18 +72,19 @@ extension DetailViewModel {
             mode = .edit
             return
         }
-        do {
-            try createDiaryDataUseCase.updateData(data: diary)
-        } catch {
-            sendError(error: error)
+        
+        createDiaryDataUseCase.updateData(data: diary) { error in
+            if let error = error {
+                self.sendError(error: error)
+            }
         }
     }
     
     func deleteData() {
-        do {
-            try deleteUseCase.deleteData(id: diary.id)
-        } catch {
-            sendError(error: error)
+        deleteUseCase.deleteData(id: diary.id) { error in
+            if let error = error {
+                self.sendError(error: error)
+            }
         }
     }
     
@@ -93,10 +94,10 @@ extension DetailViewModel {
             return
         }
         
-        do {
-            try deleteUseCase.deleteData(id: diary.id)
-        } catch {
-            sendError(error: error)
+        deleteUseCase.deleteData(id: diary.id) { error in
+            if let error = error {
+                self.sendError(error: error)
+            }
         }
     }
     

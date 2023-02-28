@@ -44,13 +44,13 @@ final class ListViewModel {
     }
     
     private func fetchData() {
-        let result = fetchUseCase.fetchData()
-        
-        switch result {
-        case .success(let datas):
-            diaryReports = datas
-        case .failure(let error):
-            sendError(error: error)
+        fetchUseCase.fetchData { result in
+            switch result {
+            case .success(let datas):
+                self.diaryReports = datas
+            case .failure(let error):
+                self.sendError(error: error)
+            }
         }
     }
     
@@ -83,10 +83,10 @@ extension ListViewModel {
         
         let deleteData = diaryReports.remove(at: index)
         
-        do {
-            try deleteUseCase.deleteData(id: deleteData.id)
-        } catch {
-            sendError(error: error)
+        deleteUseCase.deleteData(id: deleteData.id) { error in
+            if let error = error {
+                self.sendError(error: error)
+            }
         }
     }
     

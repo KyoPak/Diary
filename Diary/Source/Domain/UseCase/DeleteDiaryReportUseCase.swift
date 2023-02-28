@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DeleteDiaryReportUseCase {
-    func deleteData(id: UUID) throws
+    func deleteData(id: UUID, completion: @escaping (DataError?) -> Void)
 }
 
 final class DefaultDeleteDiaryReportUseCase: DeleteDiaryReportUseCase {
@@ -18,12 +18,10 @@ final class DefaultDeleteDiaryReportUseCase: DeleteDiaryReportUseCase {
         self.coreDataRepository = coreDataRepository
     }
     
-    func deleteData(id: UUID) throws {
-        do {
-            try coreDataRepository.delete(id: id)
-        } catch {
-            if let error = error as? DataError {
-                throw error
+    func deleteData(id: UUID, completion: @escaping (DataError?) -> Void) {
+        coreDataRepository.delete(id: id) { error in
+            if let error = error {
+                completion(error)
             }
         }
     }

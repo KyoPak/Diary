@@ -8,8 +8,8 @@
 import Foundation
 
 protocol CoreDataRepository {
-    func fetch() -> Result<[DiaryReport], DataError>
+    func fetch(completion: @escaping (Result<[DiaryData], DataError>) -> Void)
     func create(data: DiaryReport)
-    func update(id: UUID, contentText: String) throws
-    func delete(id: UUID) throws
+    func update(id: UUID, contentText: String, completion: @escaping (DataError?) -> Void)
+    func delete(id: UUID, completion: @escaping (DataError?) -> Void)
 }

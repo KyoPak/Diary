@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FetchDiaryReportsUseCase {
-    func fetchData() -> Result<[DiaryReport], DataError>
+    func fetchData(completion: @escaping (Result<[DiaryReport], DataError>) -> Void)
 }
 
 final class DefaultFetchDiaryReportsUseCase: FetchDiaryReportsUseCase {
@@ -18,14 +18,27 @@ final class DefaultFetchDiaryReportsUseCase: FetchDiaryReportsUseCase {
         self.coreDataRepository = coreDataRepository
     }
     
-    func fetchData() -> Result<[DiaryReport], DataError> {
-        let result = coreDataRepository.fetch()
+    private func convert(from data: DiaryData) -> DiaryReport {
+        let weatherData = CurrentWeather(iconID: data.weather?.iconID, main: data.weather?.main)
         
-        switch result {
-        case .success(let datas):
-            return .success(datas)
-        case .failure(let error):
-            return .failure(error)
+        let diaryReport = DiaryReport(
+            id: data.id ?? UUID(),
+            contentText: data.contentText ?? "",
+            createdAt: data.createdAt ?? Date(),
+            weather: weatherData
+        )
+        
+        return diaryReport
+    }
+    
+    func fetchData(completion: @escaping (Result<[DiaryReport], DataError>) -> Void) {
+        coreDataRepository.fetch { result in
+            switch result {
+            case .success(let datas):
+                completion(.success(datas.map(self.convert(from:))))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
 }
