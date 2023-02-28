@@ -50,6 +50,8 @@
 		3CB723D029AE2BAC00C00A20 /* CacheRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8FB29A8BDFA00ECC30A /* CacheRepository.swift */; };
 		3CB723D229AE2CCF00C00A20 /* FetchDiaryReportsUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB723D129AE2CCF00C00A20 /* FetchDiaryReportsUseCaseTest.swift */; };
 		3CB723D429AE2CF200C00A20 /* MockCoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB723D329AE2CF200C00A20 /* MockCoreDataRepository.swift */; };
+		3CB723D929AE31CB00C00A20 /* SaveDiaryReportUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB723D829AE31CB00C00A20 /* SaveDiaryReportUseCaseTest.swift */; };
+		3CB723DA29AE31FB00C00A20 /* SaveDiaryReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF31C29A3C27B009F0889 /* SaveDiaryReportUseCase.swift */; };
 		3CBA423B29A36E54007D6B7A /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA423A29A36E54007D6B7A /* CellViewModel.swift */; };
 		3CC8D58029A120F3002982D3 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC8D57F29A120F3002982D3 /* ListViewController.swift */; };
 		3CC8D58229A12107002982D3 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC8D58129A12107002982D3 /* ListViewModel.swift */; };
@@ -122,6 +124,7 @@
 		3CB723BC29AE29B900C00A20 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		3CB723D129AE2CCF00C00A20 /* FetchDiaryReportsUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDiaryReportsUseCaseTest.swift; sourceTree = "<group>"; };
 		3CB723D329AE2CF200C00A20 /* MockCoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataRepository.swift; sourceTree = "<group>"; };
+		3CB723D829AE31CB00C00A20 /* SaveDiaryReportUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDiaryReportUseCaseTest.swift; sourceTree = "<group>"; };
 		3CBA423A29A36E54007D6B7A /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		3CC8D57F29A120F3002982D3 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		3CC8D58129A12107002982D3 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -311,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				3CB723D129AE2CCF00C00A20 /* FetchDiaryReportsUseCaseTest.swift */,
+				3CB723D829AE31CB00C00A20 /* SaveDiaryReportUseCaseTest.swift */,
 				3CB723D729AE2DBB00C00A20 /* Mocks */,
 			);
 			path = UseCaseTest;
@@ -669,10 +673,12 @@
 				3CB723B629AE298B00C00A20 /* NetworkRepositoryTests.swift in Sources */,
 				3CB723C229AE2B1000C00A20 /* CurrentWeather.swift in Sources */,
 				3CB723BD29AE29B900C00A20 /* MockNetworkService.swift in Sources */,
+				3CB723D929AE31CB00C00A20 /* SaveDiaryReportUseCaseTest.swift in Sources */,
 				3CB723CA29AE2B8500C00A20 /* CoreDataService.swift in Sources */,
 				3CB723C629AE2B4500C00A20 /* NetworkRepository.swift in Sources */,
 				3CB723CF29AE2BA800C00A20 /* CoreDataRepository.swift in Sources */,
 				3CB723C829AE2B5D00C00A20 /* WeatherAPIData.swift in Sources */,
+				3CB723DA29AE31FB00C00A20 /* SaveDiaryReportUseCase.swift in Sources */,
 				3CB723C529AE2B2700C00A20 /* FetchDiaryReportsUseCase.swift in Sources */,
 				3CB723CD29AE2B9100C00A20 /* WeatherData+CoreDataClass.swift in Sources */,
 				3CB723BF29AE2B0500C00A20 /* DefaultCoreDataRepository.swift in Sources */,
