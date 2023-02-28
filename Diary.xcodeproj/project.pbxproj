@@ -457,6 +457,7 @@
 		C739AE18284DF28600741E8F = {
 			isa = PBXGroup;
 			children = (
+				3C3D08872952A60D007DB5E7 /* .swiftlint.yml */,
 				C739AE23284DF28600741E8F /* Diary */,
 				3CB723B429AE298B00C00A20 /* DiaryTests */,
 				C739AE22284DF28600741E8F /* Products */,
@@ -477,7 +478,6 @@
 		C739AE23284DF28600741E8F /* Diary */ = {
 			isa = PBXGroup;
 			children = (
-				3C3D08872952A60D007DB5E7 /* .swiftlint.yml */,
 				3CC8D57529A12018002982D3 /* Resource */,
 				3CC8D57629A12056002982D3 /* Source */,
 				C739AE2D284DF28600741E8F /* Diary.xcdatamodeld */,
