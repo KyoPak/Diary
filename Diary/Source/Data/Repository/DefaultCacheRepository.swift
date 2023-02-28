@@ -8,19 +8,19 @@
 import Foundation
 
 final class DefaultCacheRepository: CacheRepository {
-    private let cache = NSCache<NSString, WrapperData>()
+    private let cacheService: CacheService
+    
+    init(cacheService: CacheService) {
+        self.cacheService = cacheService
+    }
     
     func fetchCacheData(id: String) -> WrapperData? {
         let cacheKey = NSString(string: id)
-        if let cacheWrapperData = cache.object(forKey: cacheKey) {
-            return cacheWrapperData
-        } else {
-            return nil
-        }
+        return cacheService.fetch(key: cacheKey)
     }
     
     func saveCache(id: String, wrapperData: WrapperData) {
         let cacheKey = NSString(string: id)
-        cache.setObject(wrapperData, forKey: cacheKey)
+        cacheService.save(key: cacheKey, wrapperData: wrapperData)
     }
 }
