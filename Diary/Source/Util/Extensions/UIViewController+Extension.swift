@@ -54,4 +54,3 @@ extension UIViewController {
         present(activiyController, animated: true, completion: nil)
     }
 }
-

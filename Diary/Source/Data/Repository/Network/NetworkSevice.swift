@@ -12,7 +12,10 @@ protocol NetworkSevice {
 }
 
 final class DefaultNetworkSevice: NetworkSevice {
-    func request(_ request: URLRequest, completion: @escaping (Result<Data, SessionError>) -> Void) {
+    func request(
+        _ request: URLRequest,
+        completion: @escaping (Result<Data, SessionError>) -> Void
+    ) {
         let sesseion = URLSession(configuration: .default)
         
         sesseion.dataTask(with: request) { data, response, error in

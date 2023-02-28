@@ -68,12 +68,12 @@ extension DetailViewModel {
         diary.contentText = contents
         
         if mode == .new {
-            createDiaryDataUseCase.createData(data: diary)
+            createDiaryDataUseCase.createData(diary)
             mode = .edit
             return
         }
         
-        createDiaryDataUseCase.updateData(data: diary) { error in
+        createDiaryDataUseCase.updateData(diary) { error in
             if let error = error {
                 self.sendError(error: error)
             }

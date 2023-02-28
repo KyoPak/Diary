@@ -8,8 +8,8 @@
 import Foundation
 
 protocol SaveDiaryReportUseCase {
-    func createData(data: DiaryReport)
-    func updateData(data: DiaryReport, completion: @escaping (DataError?) -> Void)
+    func createData(_ data: DiaryReport)
+    func updateData(_ data: DiaryReport, completion: @escaping (DataError?) -> Void)
 }
 
 final class DefaultSaveDiaryReportUseCase: SaveDiaryReportUseCase {
@@ -19,11 +19,11 @@ final class DefaultSaveDiaryReportUseCase: SaveDiaryReportUseCase {
         self.coreDataRepository = coreDataRepository
     }
     
-    func createData(data: DiaryReport) {
+    func createData(_ data: DiaryReport) {
         coreDataRepository.create(data: data)
     }
     
-    func updateData(data: DiaryReport, completion: @escaping (DataError?) -> Void) {
+    func updateData(_ data: DiaryReport, completion: @escaping (DataError?) -> Void) {
         coreDataRepository.update(id: data.id, contentText: data.contentText) { error in
             if let error = error {
                 completion(error)

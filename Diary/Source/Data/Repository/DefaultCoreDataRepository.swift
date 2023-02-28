@@ -8,7 +8,6 @@
 import Foundation
 
 final class DefaultCoreDataRepository {
-    
     private let coreDataService: CoreDataService
     
     init(coreDataService: CoreDataService) {
