@@ -24,6 +24,24 @@ final class NetworkRepositoryTests: XCTestCase {
         networkService = nil
     }
     
+    func test_configureRequest() {
+        //Given
+        let id = UUID()
+        guard let dummyRequest = try? NetworkRequest.loadImage(id: id.description).generateRequest() else {
+            XCTFail("Error")
+            return
+        }
+        
+        //When
+        guard let request = try? repository.configureRequest(type: .loadImage(id: id.description)) else {
+            XCTFail("Error")
+            return
+        }
+        
+        //Then
+        XCTAssertEqual(dummyRequest, request)
+    }
+    
     func test_fetch() throws {
         // Given
         // Data 셋팅
