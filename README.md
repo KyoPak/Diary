@@ -1,6 +1,5 @@
 # Diary Refactoring ReadME
 
-# Diary ReadME
 - MVC를 기반으로 팀원과 만든 Diary앱을 개인적으로 MVVM-C로 Refactoring하였습니다.
 - 텍스트 기능을 구현 할 때, 아이폰 `메모` 앱의 텍스트 입력 로직을 참고하였습니다.
 
@@ -135,14 +134,14 @@
 </details>
 
 ### 👟 Refactoring MVVM-C: Personal
-기간 : 2023/02/19 ~ 2023/02/25
+기간 : 2023/02/19 ~ 2023/03/01
 
 - ✅ MVVM Architecture 사용
 - ✅ Coordinator 패턴 사용
 - ✅ Clean Architecture 사용
 - ✅ SearchBar 구현
 - ✅ Builder 패턴 사용하여 Alert 관리
-
+- ✅ Unit Test
 
 
 ## 실행 화면
@@ -203,14 +202,7 @@
 ```
 ├── Diary
 │   ├── Diary.xcdatamodeld
-│   │   ├── Diary.xcdatamodel
-│   │   │   └── contents
-│   │   ├── Diary_v2.xcdatamodel
-│   │   │   └── contents
-│   │   └── Diary_v3.xcdatamodel
-│   │       └── contents
 │   ├── MappingModelV2ToV3.xcmappingmodel
-│   │   └── xcmapping.xml
 │   ├── Resource
 │   └── Source
 │       ├── AlertBuilder
@@ -228,16 +220,19 @@
 │       ├── Data
 │       │   └── Repository
 │       │       ├── Cache
-│       │       │   └── DefaultCacheRepository.swift
+│       │       │   └── CacheService.swift
 │       │       ├── CoreData
-│       │       │   ├── DefaultCoreDataRepository.swift
+│       │       │   ├── CoreDataService.swift
 │       │       │   ├── DiaryData+CoreDataClass.swift
 │       │       │   ├── DiaryData+CoreDataProperties.swift
 │       │       │   ├── WeatherData+CoreDataClass.swift
 │       │       │   └── WeatherData+CoreDataProperties.swift
-│       │       └── WeatherAPI
-│       │           ├── DefaultWeatherAPIRepository.swift
+│       │       ├── DefaultCacheRepository.swift
+│       │       ├── DefaultCoreDataRepository.swift
+│       │       ├── DefaultNetworkRepository.swift
+│       │       └── Network
 │       │           ├── NetworkRequest.swift
+│       │           ├── NetworkSevice.swift
 │       │           └── WeatherAPIData.swift
 │       ├── Domain
 │       │   ├── Entity
@@ -248,7 +243,7 @@
 │       │   ├── RepositoryProtocol
 │       │   │   ├── CacheRepository.swift
 │       │   │   ├── CoreDataRepository.swift
-│       │   │   └── WeatherAPIRepository.swift
+│       │   │   └── NetworkRepository.swift
 │       │   └── UseCase
 │       │       ├── CheckCacheUseCase.swift
 │       │       ├── DeleteDiaryReportUseCase.swift
@@ -281,6 +276,21 @@
 │               ├── NSMutableAttributedString+Extension.swift
 │               ├── UIComponent+Extension.swift
 │               └── UIViewController+Extension.swift
+├── DiaryTests
+│   ├── Presentation
+│   ├── RepositoryTest
+│   │   ├── CacheRepositoryTests.swift
+│   │   ├── NetworkRepositoryTests.swift
+│   │   └── Mocks
+│   │       ├── MockCacheService.swift
+│   │       └── MockNetworkService.swift
+│   └── UseCaseTest
+│       ├── DeleteDiaryReportUseCaseTest.swift
+│       ├── FetchDiaryReportsUseCaseTest.swift
+│       ├── SaveDiaryReportUseCaseTest.swift
+│       └── Mocks
+│           └── MockCoreDataRepository.swift
+│       
 ├── Podfile
 ├── Podfile.lock
 └── README.md
@@ -293,9 +303,11 @@
 <summary> 
 펼쳐보기
 </summary>
+    
+- 몇 차례 MVVM 설계 패턴을 사용해보고 느낀 장점은 ViewController와 ViewModel의 역할 분리가 확실히 된다는 점과
+ViewModel이 담고 있는 비즈니스 로직에 대한 Testable한 코드 작성이었습니다.
 
-추후 작성
-
+    
 </details>
 
 ### ⚙️ Clean Architecture
@@ -304,7 +316,11 @@
 펼쳐보기
 </summary>
 
-추후 작성
+- 클린아키텍처를 사용함으로서 기존 ViewModel이 담고 있던 비즈니스로직을 UseCase(Domain Layer)로 나누고 더 나아가 Repository(DataLayer)로 책임들을 나눔으로서 각 영역이 확실한 책임을 가질 수 있게 되었다고 생각합니다.
+- 클린아키텍처를 경험해보며 느낀점은 아래와 같습니다.
+    - 해당 프로젝트 같은 소규모 앱에도 많은 파일과 폴더 구분화 작업이 필요함을 느꼈으며 작은 규모의 앱보다는 큰 규모의 앱에서 더욱 효과적일 것이라고 생각이 들었습니다.
+    - 확장성, 유지보수성 : UI적인 부분이 바뀐다면 view,viewModel / DB,Network관련 부분이 변경된다면 Repository 구체 타입까지만 변경하면 되기 때문에 변경에 있어서 강점이 있다고 생각이 들었습니다.
+    - Testable한 코드 : 책임을 모두 분배함으로서 UnitTest를 시행할 때도 기존의 MVVM보다 세분화하여 Test를 수행할 수 있었던 것 같습니다.
 
 </details>
 
@@ -676,7 +692,23 @@ navigationController?.navigationBar.prefersLargeTitles = true
 navigationItem.largeTitleDisplayMode = .never
 ```
 
-    
+</details>
+
+### 🔥 Core Location은 비즈니스 로직에 포함일까?
+<details>
+<summary> 
+펼쳐보기
+</summary>
+
+- 클린아키텍쳐를 구성하며 CoreLocation은 비즈니스로직일까?에 대한 의문이 들었습니다.
+- 따라서 UseCase에 속해야하는지, ViewModel에 속해야하는지 고민이 되었습니다.
+- 결론은 View에 속하게끔 구현하였습니다.
+    - CoreLocation 같은 경우 유저가 거부하면 사용을 안할 수 있습니다.
+    - 하지만 Business Logic은 회사의 정책이고, 필수적인 로직 및 기능 구현이라고 생각하였습니다.
+    - 따라서 유저가 사용여부를 결정하는 `Core Location`의 경우 `Present Layer`에 속해야한다고 생각하였습니다.
+    - 그리고 `Core Location`의 경우 권한 요청의 팝업이 뜨고 유저의 결정에 따라 기능 사용여부가 바뀌기 때문에
+유저와의 상호작용이라고 생각하였고 View에 속해야한다고 생각이 들었습니다.
+
 </details>
 
 ## 참고 링크
