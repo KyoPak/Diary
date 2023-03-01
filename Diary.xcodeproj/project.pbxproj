@@ -16,6 +16,10 @@
 		3C66C3C529A2615B00972F5A /* FetchDiaryReportsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C66C3C429A2615B00972F5A /* FetchDiaryReportsUseCase.swift */; };
 		3C66C3C729A2617000972F5A /* DeleteDiaryReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C66C3C629A2617000972F5A /* DeleteDiaryReportUseCase.swift */; };
 		3C66C3CA29A2634100972F5A /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C66C3C929A2634100972F5A /* CoreDataRepository.swift */; };
+		3C7AAEA429AF5E39000A1DD6 /* MockCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7AAEA329AF5E39000A1DD6 /* MockCacheService.swift */; };
+		3C7AAEA529AF5EA7000A1DD6 /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7238229ADBDB000C00A20 /* CacheService.swift */; };
+		3C7AAEA729AF5F6D000A1DD6 /* CacheRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7AAEA629AF5F6D000A1DD6 /* CacheRepositoryTests.swift */; };
+		3C7AAEA829AF601C000A1DD6 /* DefaultCacheRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8A8F729A8BD6A00ECC30A /* DefaultCacheRepository.swift */; };
 		3C7F9BB02963C2D5006CAA4B /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7F9BAF2963C2D5006CAA4B /* NetworkRequest.swift */; };
 		3C8DF30B29A381A9009F0889 /* LoadWeatherImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF30A29A381A9009F0889 /* LoadWeatherImageUseCase.swift */; };
 		3C8DF30D29A38237009F0889 /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8DF30C29A38237009F0889 /* NetworkRepository.swift */; };
@@ -110,6 +114,8 @@
 		3C66C3C429A2615B00972F5A /* FetchDiaryReportsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDiaryReportsUseCase.swift; sourceTree = "<group>"; };
 		3C66C3C629A2617000972F5A /* DeleteDiaryReportUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDiaryReportUseCase.swift; sourceTree = "<group>"; };
 		3C66C3C929A2634100972F5A /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
+		3C7AAEA329AF5E39000A1DD6 /* MockCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCacheService.swift; sourceTree = "<group>"; };
+		3C7AAEA629AF5F6D000A1DD6 /* CacheRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheRepositoryTests.swift; sourceTree = "<group>"; };
 		3C7F9BAF2963C2D5006CAA4B /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		3C8DF30A29A381A9009F0889 /* LoadWeatherImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadWeatherImageUseCase.swift; sourceTree = "<group>"; };
 		3C8DF30C29A38237009F0889 /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
@@ -269,6 +275,15 @@
 			path = RepositoryProtocol;
 			sourceTree = "<group>";
 		};
+		3C7AAEA929AF624D000A1DD6 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				3CB723BC29AE29B900C00A20 /* MockNetworkService.swift */,
+				3C7AAEA329AF5E39000A1DD6 /* MockCacheService.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		3C8DF30E29A39442009F0889 /* DetailScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,8 +322,9 @@
 		3CB723D529AE2D9900C00A20 /* RepositoryTest */ = {
 			isa = PBXGroup;
 			children = (
+				3C7AAEA929AF624D000A1DD6 /* Mocks */,
 				3CB723B529AE298B00C00A20 /* NetworkRepositoryTests.swift */,
-				3CB723BC29AE29B900C00A20 /* MockNetworkService.swift */,
+				3C7AAEA629AF5F6D000A1DD6 /* CacheRepositoryTests.swift */,
 			);
 			path = RepositoryTest;
 			sourceTree = "<group>";
@@ -316,10 +332,10 @@
 		3CB723D629AE2DB200C00A20 /* UseCaseTest */ = {
 			isa = PBXGroup;
 			children = (
+				3CB723D729AE2DBB00C00A20 /* Mocks */,
 				3CB723D129AE2CCF00C00A20 /* FetchDiaryReportsUseCaseTest.swift */,
 				3CB723D829AE31CB00C00A20 /* SaveDiaryReportUseCaseTest.swift */,
 				3CEAE4FF29AE437A00F1F759 /* DeleteDiaryReportUseCaseTest.swift */,
-				3CB723D729AE2DBB00C00A20 /* Mocks */,
 			);
 			path = UseCaseTest;
 			sourceTree = "<group>";
@@ -671,6 +687,7 @@
 			files = (
 				3CB723C329AE2B1200C00A20 /* DecoderManager.swift in Sources */,
 				3CB723C029AE2B0900C00A20 /* NetworkSevice.swift in Sources */,
+				3C7AAEA729AF5F6D000A1DD6 /* CacheRepositoryTests.swift in Sources */,
 				3CB723C129AE2B0D00C00A20 /* DiaryReport.swift in Sources */,
 				3CB723CC29AE2B8D00C00A20 /* DiaryData+CoreDataProperties.swift in Sources */,
 				3CEAE50029AE437A00F1F759 /* DeleteDiaryReportUseCaseTest.swift in Sources */,
@@ -681,9 +698,11 @@
 				3CB723D929AE31CB00C00A20 /* SaveDiaryReportUseCaseTest.swift in Sources */,
 				3CB723CA29AE2B8500C00A20 /* CoreDataService.swift in Sources */,
 				3CB723C629AE2B4500C00A20 /* NetworkRepository.swift in Sources */,
+				3C7AAEA829AF601C000A1DD6 /* DefaultCacheRepository.swift in Sources */,
 				3CB723CF29AE2BA800C00A20 /* CoreDataRepository.swift in Sources */,
 				3CB723C829AE2B5D00C00A20 /* WeatherAPIData.swift in Sources */,
 				3CB723DA29AE31FB00C00A20 /* SaveDiaryReportUseCase.swift in Sources */,
+				3C7AAEA529AF5EA7000A1DD6 /* CacheService.swift in Sources */,
 				3CEAE50129AE438500F1F759 /* DeleteDiaryReportUseCase.swift in Sources */,
 				3CB723C529AE2B2700C00A20 /* FetchDiaryReportsUseCase.swift in Sources */,
 				3CB723CD29AE2B9100C00A20 /* WeatherData+CoreDataClass.swift in Sources */,
@@ -695,6 +714,7 @@
 				3CB723C729AE2B5900C00A20 /* NetworkRequest.swift in Sources */,
 				3CB723BE29AE2B0200C00A20 /* DefaultNetworkRepository.swift in Sources */,
 				3CB723CB29AE2B8900C00A20 /* DiaryData+CoreDataClass.swift in Sources */,
+				3C7AAEA429AF5E39000A1DD6 /* MockCacheService.swift in Sources */,
 				3CB723CE29AE2B9400C00A20 /* WeatherData+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
