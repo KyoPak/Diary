@@ -16,9 +16,9 @@
 
 
 ## 팀 소개
-|[Kyo](https://github.com/KyoPak)|[Baem](https://github.com/Dylan-yoon)|
-|:---:|:---:|
-| <img width="180px" img style="border: 2px solid lightgray; border-radius: 90px;-moz-border-radius: 90px;-khtml-border-radius: 90px;-webkit-border-radius: 90px;" src= "https://user-images.githubusercontent.com/59204352/193524215-4f9636e8-1cdb-49f1-9a17-1e4fe8d76655.PNG" >|<img width="180px" img style="border: 2px solid lightgray; border-radius: 90px;-moz-border-radius: 90px;-khtml-border-radius: 90px;-webkit-border-radius: 90px;" src= https://i.imgur.com/jrW5RQj.png>|
+|[Kyo](https://github.com/KyoPak)|
+|:---:|
+| <img width="180px" img style="border: 2px solid lightgray; border-radius: 90px;-moz-border-radius: 90px;-khtml-border-radius: 90px;-webkit-border-radius: 90px;" src= "https://user-images.githubusercontent.com/59204352/193524215-4f9636e8-1cdb-49f1-9a17-1e4fe8d76655.PNG" >|
 
 ## Ground Rule
 
