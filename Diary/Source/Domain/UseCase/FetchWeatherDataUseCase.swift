@@ -16,10 +16,10 @@ protocol FetchWeatherDataUseCase {
 }
 
 final class DefaultFetchWeatherDataUseCase {
-    private let networkRepository: NetworkRepository
+    private let currentWeatherRepository: CurrentWeatherRepository
     
-    init(networkRepository: NetworkRepository) {
-        self.networkRepository = networkRepository
+    init(currentWeatherRepository: CurrentWeatherRepository) {
+        self.currentWeatherRepository = currentWeatherRepository
     }
     
     private func convertWeatherData(
@@ -47,13 +47,13 @@ extension DefaultFetchWeatherDataUseCase: FetchWeatherDataUseCase {
         completion: @escaping (CurrentWeather) -> Void
     ) {
         
-        guard let request = try? networkRepository.configureRequest(
+        guard let request = try? currentWeatherRepository.configureRequest(
             type: .fetchData(lat: lat, lon: lon)
         ) else {
             return
         }
         
-        networkRepository.fetch(request: request) { [weak self] result in
+        currentWeatherRepository.fetch(request: request) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.convertWeatherData(data) { (iconID, main) in

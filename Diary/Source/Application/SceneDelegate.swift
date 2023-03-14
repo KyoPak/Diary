@@ -19,18 +19,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         let navigationController = UINavigationController()
-        let coreDataRepository = DefaultCoreDataRepository(
+        let diaryDataRepository = DefaultDiaryDataRepository(
             coreDataService: DefaultCoreDataService()
         )
 
-        let networkRepository = DefaultNetworkRepository(
+        let currentWeatherRepository = DefaultCurrentWeatherRepository(
             networkService: DefaultNetworkSevice()
         )
         
         let coordinator = MainCoordinator(
             navigationController: navigationController,
-            coreDataRepository: coreDataRepository,
-            networkRepository: networkRepository
+            diaryDataRepository: diaryDataRepository,
+            currentWeatherRepository: currentWeatherRepository
         )
         
         coordinator.start()

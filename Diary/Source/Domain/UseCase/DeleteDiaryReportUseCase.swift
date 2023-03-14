@@ -12,14 +12,14 @@ protocol DeleteDiaryReportUseCase {
 }
 
 final class DefaultDeleteDiaryReportUseCase: DeleteDiaryReportUseCase {
-    private let coreDataRepository: CoreDataRepository
+    private let diaryDataRepository: DiaryDataRepository
     
-    init(coreDataRepository: CoreDataRepository) {
-        self.coreDataRepository = coreDataRepository
+    init(diaryDataRepository: DiaryDataRepository) {
+        self.diaryDataRepository = diaryDataRepository
     }
     
     func deleteData(id: UUID, completion: @escaping (DataError?) -> Void) {
-        coreDataRepository.delete(id: id) { error in
+        diaryDataRepository.delete(id: id) { error in
             if let error = error {
                 completion(error)
             }

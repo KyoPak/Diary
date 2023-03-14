@@ -10,26 +10,26 @@ import XCTest
 
 final class FetchDiaryReportsUseCaseTest: XCTestCase {
     var fetchDiaryUseCase: FetchDiaryReportsUseCase!
-    var coreDataRepository: CoreDataRepository!
+    var diaryDataRepository: DiaryDataRepository!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        coreDataRepository = MockCoreDataRepository()
-        fetchDiaryUseCase =  DefaultFetchDiaryReportsUseCase(coreDataRepository: coreDataRepository)
+        diaryDataRepository = MockDiaryDataRepository()
+        fetchDiaryUseCase =  DefaultFetchDiaryReportsUseCase(diaryDataRepository: diaryDataRepository)
     }
     
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         fetchDiaryUseCase = nil
-        coreDataRepository = nil
+        diaryDataRepository = nil
     }
     
     func test_fetchData_success() {
         // given
-        coreDataRepository.create(
+        diaryDataRepository.create(
             data: DiaryReport(id: UUID(), contentText: "test1", createdAt: Date(), weather: CurrentWeather())
         )
-        coreDataRepository.create(
+        diaryDataRepository.create(
             data: DiaryReport(id: UUID(), contentText: "test2", createdAt: Date(), weather: CurrentWeather())
         )
         // when

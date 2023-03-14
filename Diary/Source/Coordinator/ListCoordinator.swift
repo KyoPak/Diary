@@ -11,22 +11,22 @@ final class ListCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
-    var coreDataRepository: CoreDataRepository
-    var networkRepository: NetworkRepository
+    var diaryDataRepository: DiaryDataRepository
+    var currentWeatherRepository: CurrentWeatherRepository
     
     init(navigationController: UINavigationController,
-         coreDataRepository: CoreDataRepository,
-         networkRepository: NetworkRepository
+         diaryDataRepository: DiaryDataRepository,
+         currentWeatherRepository: CurrentWeatherRepository
     ) {
         self.navigationController = navigationController
-        self.coreDataRepository = coreDataRepository
-        self.networkRepository = networkRepository
+        self.diaryDataRepository = diaryDataRepository
+        self.currentWeatherRepository = currentWeatherRepository
     }
     
     func start() {
         let viewModel = ListViewModel(
-            fetchUseCase: DefaultFetchDiaryReportsUseCase(coreDataRepository: coreDataRepository),
-            deleteUseCase: DefaultDeleteDiaryReportUseCase(coreDataRepository: coreDataRepository),
+            fetchUseCase: DefaultFetchDiaryReportsUseCase(diaryDataRepository: diaryDataRepository),
+            deleteUseCase: DefaultDeleteDiaryReportUseCase(diaryDataRepository: diaryDataRepository),
             cacheUseCase: DefaultCacheCheckUseCase(
                 cacheRepository: DefaultCacheRepository(cacheService: DefaultCacheService())
             )
@@ -42,8 +42,8 @@ final class ListCoordinator: Coordinator {
     func createDetailCoordinator(data: DiaryReport?) {
         let detailCoordinator = DetailCoordinator(
             navigationController: navigationController,
-            coreDataRepository: coreDataRepository,
-            networkRepository: networkRepository,
+            diaryDataRepository: diaryDataRepository,
+            currentWeatherRepository: currentWeatherRepository,
             data: data
         )
         detailCoordinator.parentCoordinator = self

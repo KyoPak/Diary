@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final class MockCoreDataRepository: CoreDataRepository {
+final class MockDiaryDataRepository: DiaryDataRepository {
     lazy var mockPersistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Diary")
         let description = NSPersistentStoreDescription()

@@ -12,20 +12,20 @@ protocol LoadWeatherImageUseCase {
 }
 
 final class DefaultLoadWeatherImageUseCase: LoadWeatherImageUseCase {
-    private let networkRepository: NetworkRepository
+    private let currentWeatherRepository: CurrentWeatherRepository
     
-    init(networkRepository: NetworkRepository) {
-        self.networkRepository = networkRepository
+    init(currentWeatherRepository: CurrentWeatherRepository) {
+        self.currentWeatherRepository = currentWeatherRepository
     }
     
     func loadImage(id: String, completion: @escaping (Data) -> Void) {
-        guard let request = try? networkRepository.configureRequest(
+        guard let request = try? currentWeatherRepository.configureRequest(
             type: .loadImage(id: id)
         ) else {
             return
         }
         
-        networkRepository.fetch(request: request) { result in
+        currentWeatherRepository.fetch(request: request) { result in
             switch result {
             case .success(let data):
                 completion(data)

@@ -67,7 +67,7 @@ extension ListViewController {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: ListCell.identifiable,
                 for: indexPath
-            ) as? ListCell, let networkRepository = self.coordinator?.networkRepository else {
+            ) as? ListCell, let currentWeatherRepository = self.coordinator?.currentWeatherRepository else {
                 
                 let errorCell = UICollectionViewCell()
                 return errorCell
@@ -76,7 +76,7 @@ extension ListViewController {
             let cellViewModel = CellViewModel(
                 diary: data,
                 weatherImageUseCase: DefaultLoadWeatherImageUseCase(
-                    networkRepository: networkRepository
+                    currentWeatherRepository: currentWeatherRepository
                 ),
                 cacheUseCase: self.viewModel.cacheUseCase
             )

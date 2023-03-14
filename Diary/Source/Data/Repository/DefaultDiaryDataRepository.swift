@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  DefaultDiaryDataRepository.swift
 //  Diary
 //
 //  Created by parkhyo on 2023/02/27.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefaultCoreDataRepository {
+final class DefaultDiaryDataRepository {
     private let coreDataService: CoreDataService
     
     init(coreDataService: CoreDataService) {
@@ -28,7 +28,7 @@ final class DefaultCoreDataRepository {
     }
 }
 
-extension DefaultCoreDataRepository: CoreDataRepository {
+extension DefaultDiaryDataRepository: DiaryDataRepository {
     func fetch(completion: @escaping (Result<[DiaryData], DataError>) -> Void) {
         let request = DiaryData.fetchRequest()
         

@@ -10,27 +10,27 @@ import XCTest
 final class DeleteDiaryReportUseCaseTest: XCTestCase {
 
     var deleteDiaryUseCase: DeleteDiaryReportUseCase!
-    var coreDataRepository: CoreDataRepository!
+    var diaryDataRepository: DiaryDataRepository!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        coreDataRepository = MockCoreDataRepository()
-        deleteDiaryUseCase = DefaultDeleteDiaryReportUseCase(coreDataRepository: coreDataRepository)
+        diaryDataRepository = MockDiaryDataRepository()
+        deleteDiaryUseCase = DefaultDeleteDiaryReportUseCase(diaryDataRepository: diaryDataRepository)
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        coreDataRepository = nil
+        diaryDataRepository = nil
         deleteDiaryUseCase = nil
     }
     
     func test_deleteData_success() {
         //given
         let testID = UUID()
-        coreDataRepository.create(
+        diaryDataRepository.create(
             data: DiaryReport(id: testID, contentText: "test1", createdAt: Date(), weather: CurrentWeather())
         )
-        coreDataRepository.create(
+        diaryDataRepository.create(
             data: DiaryReport(id: UUID(), contentText: "test2", createdAt: Date(), weather: CurrentWeather())
         )
         
@@ -44,7 +44,7 @@ final class DeleteDiaryReportUseCaseTest: XCTestCase {
         }
         
         //then
-        coreDataRepository.fetch { result in
+        diaryDataRepository.fetch { result in
             switch result {
             case .success(let datas):
                 XCTAssertEqual(datas.count, 1)

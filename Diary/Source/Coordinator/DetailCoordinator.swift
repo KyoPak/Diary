@@ -11,19 +11,19 @@ final class DetailCoordinator: Coordinator {
     var parentCoordinator: ListCoordinator?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    var coreDataRepository: CoreDataRepository
-    var networkRepository: NetworkRepository
+    var diaryDataRepository: DiaryDataRepository
+    var currentWeatherRepository: CurrentWeatherRepository
     
     private var data: DiaryReport?
     
     init(navigationController: UINavigationController,
-         coreDataRepository: CoreDataRepository,
-         networkRepository: NetworkRepository,
+         diaryDataRepository: DiaryDataRepository,
+         currentWeatherRepository: CurrentWeatherRepository,
          data: DiaryReport?
     ) {
         self.navigationController = navigationController
-        self.coreDataRepository = coreDataRepository
-        self.networkRepository = networkRepository
+        self.diaryDataRepository = diaryDataRepository
+        self.currentWeatherRepository = currentWeatherRepository
         self.data = data
     }
     
@@ -31,16 +31,16 @@ final class DetailCoordinator: Coordinator {
         let viewModel = DetailViewModel(
             data: data,
             fetchWeatherDataUseCase: DefaultFetchWeatherDataUseCase(
-                networkRepository: networkRepository
+                currentWeatherRepository: currentWeatherRepository
             ),
             weatherImageUseCase: DefaultLoadWeatherImageUseCase(
-                networkRepository: networkRepository
+                currentWeatherRepository: currentWeatherRepository
             ),
             createDiaryUseCase: DefaultSaveDiaryReportUseCase(
-                coreDataRepository: coreDataRepository
+                diaryDataRepository: diaryDataRepository
             ),
             delteUseCase: DefaultDeleteDiaryReportUseCase(
-                coreDataRepository: coreDataRepository
+                diaryDataRepository: diaryDataRepository
             )
         )
         

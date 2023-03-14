@@ -11,17 +11,17 @@ import XCTest
 final class SaveDiaryReportUseCaseTest: XCTestCase {
 
     var saveDiaryUseCase: SaveDiaryReportUseCase!
-    var coreDataRepository: CoreDataRepository!
+    var diaryDataRepository: DiaryDataRepository!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        coreDataRepository = MockCoreDataRepository()
-        saveDiaryUseCase = DefaultSaveDiaryReportUseCase(coreDataRepository: coreDataRepository)
+        diaryDataRepository = MockDiaryDataRepository()
+        saveDiaryUseCase = DefaultSaveDiaryReportUseCase(diaryDataRepository: diaryDataRepository)
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        coreDataRepository = nil
+        diaryDataRepository = nil
         saveDiaryUseCase = nil
     }
     
@@ -32,7 +32,7 @@ final class SaveDiaryReportUseCaseTest: XCTestCase {
         let expectation = XCTestExpectation(description: "Count, Content 확인")
         
         //then
-        coreDataRepository.fetch { result in
+        diaryDataRepository.fetch { result in
             switch result {
             case .success(let datas):
                 XCTAssertEqual(datas.count, 1)

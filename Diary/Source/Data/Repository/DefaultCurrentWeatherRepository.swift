@@ -1,5 +1,5 @@
 //
-//  DefaultNetworkRepository.swift
+//  DefaultCurrentWeatherRepository.swift
 //  Diary
 //
 //  Created by Kyo on 2023/02/27.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefaultNetworkRepository: NetworkRepository {
+final class DefaultCurrentWeatherRepository: CurrentWeatherRepository {
     private let networkService: NetworkSevice
     
     init(networkService: NetworkSevice) {

@@ -10,7 +10,7 @@ import UIKit
 protocol Coordinator: AnyObject {
     var childCoordinators: [Coordinator] { get set }
     var navigationController: UINavigationController { get set }
-    var coreDataRepository: CoreDataRepository { get set }
-    var networkRepository: NetworkRepository { get set }
+    var diaryDataRepository: DiaryDataRepository { get set }
+    var currentWeatherRepository: CurrentWeatherRepository { get set }
     func start()
 }

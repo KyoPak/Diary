@@ -13,18 +13,18 @@ protocol SaveDiaryReportUseCase {
 }
 
 final class DefaultSaveDiaryReportUseCase: SaveDiaryReportUseCase {
-    private let coreDataRepository: CoreDataRepository
+    private let diaryDataRepository: DiaryDataRepository
     
-    init(coreDataRepository: CoreDataRepository) {
-        self.coreDataRepository = coreDataRepository
+    init(diaryDataRepository: DiaryDataRepository) {
+        self.diaryDataRepository = diaryDataRepository
     }
     
     func createData(_ data: DiaryReport) {
-        coreDataRepository.create(data: data)
+        diaryDataRepository.create(data: data)
     }
     
     func updateData(_ data: DiaryReport, completion: @escaping (DataError?) -> Void) {
-        coreDataRepository.update(id: data.id, contentText: data.contentText) { error in
+        diaryDataRepository.update(id: data.id, contentText: data.contentText) { error in
             completion(error)
         }
     }

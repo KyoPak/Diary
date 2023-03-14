@@ -10,23 +10,23 @@ import UIKit
 final class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    var coreDataRepository: CoreDataRepository
-    var networkRepository: NetworkRepository
+    var diaryDataRepository: DiaryDataRepository
+    var currentWeatherRepository: CurrentWeatherRepository
     
     init(navigationController: UINavigationController,
-         coreDataRepository: CoreDataRepository,
-         networkRepository: NetworkRepository
+         diaryDataRepository: DiaryDataRepository,
+         currentWeatherRepository: CurrentWeatherRepository
     ) {
         self.navigationController = navigationController
-        self.coreDataRepository = coreDataRepository
-        self.networkRepository = networkRepository
+        self.diaryDataRepository = diaryDataRepository
+        self.currentWeatherRepository = currentWeatherRepository
     }
     
     func start() {
         let listCoordinator = ListCoordinator(
             navigationController: navigationController,
-            coreDataRepository: coreDataRepository,
-            networkRepository: networkRepository
+            diaryDataRepository: diaryDataRepository,
+            currentWeatherRepository: currentWeatherRepository
         )
         
         listCoordinator.parentCoordinator = self

@@ -12,10 +12,10 @@ protocol FetchDiaryReportsUseCase {
 }
 
 final class DefaultFetchDiaryReportsUseCase: FetchDiaryReportsUseCase {
-    private let coreDataRepository: CoreDataRepository
+    private let diaryDataRepository: DiaryDataRepository
     
-    init(coreDataRepository: CoreDataRepository) {
-        self.coreDataRepository = coreDataRepository
+    init(diaryDataRepository: DiaryDataRepository) {
+        self.diaryDataRepository = diaryDataRepository
     }
     
     private func convert(from data: DiaryData) -> DiaryReport {
@@ -32,7 +32,7 @@ final class DefaultFetchDiaryReportsUseCase: FetchDiaryReportsUseCase {
     }
     
     func fetchData(completion: @escaping (Result<[DiaryReport], DataError>) -> Void) {
-        coreDataRepository.fetch { result in
+        diaryDataRepository.fetch { result in
             switch result {
             case .success(let datas):
                 completion(.success(datas.map(self.convert(from:))))
